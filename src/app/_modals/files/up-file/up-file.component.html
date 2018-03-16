@@ -1,0 +1,35 @@
+<div class="modal fade" id="uploadProyecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" align="center">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" align="center">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-cloud-upload"></i> Subir Archivo(s)</h5>
+          <button type="button" (click)="removeAll()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form>
+          <div class="modal-body">
+              <p class="subtitulo">Selecciona el documento o los documentos que deseas cargar.</p>
+              <div>
+                  <label for="file" class="btn btn_250">
+                      Buscar Archivos
+                  </label>
+                  <input name="files[]" id="file" type="file"  style="display:none" #file (change)="selectFile($event)" multiple="multiple"/>
+              </div><br/>
+              <div *ngIf="!modalLoading">
+                  <p *ngFor="let file of filesToUpload;let i=index;">{{file.file.name}}<span 
+                      class="pesoDocumento">{{file.file.size/1000 | number:'.1-2'}} KB</span>
+                      <span style="font-size:20px;color: #c53030;margin-top:-5px;cursor:pointer;" *ngIf="!isLoading" (click)="remove(i)">&times;</span>
+                  <br/><span style="font-size:13px;color: #c53030;margin-top:-5px;">{{file.error}}</span>
+                      <span *ngIf="errorRecuperado" style="font-size:13px;color: #c53030;margin-top:-5px;">{{errorRecuperado}}</span>
+                  </p>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-info btn-fill pull-right" [ngClass]="{'btn_disabled':isLoading}">Guardar</button>
+              <button (click)="removeAll()" class="btn btn-danger btn-fill pull-right" data-dismiss="modal" aria-label="Close">Cancelar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>

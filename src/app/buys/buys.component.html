@@ -1,0 +1,43 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="header">
+                    <div class="header_left">
+                      <h4 class="title">Compras</h4>
+                      <p class="category"><i class="fa fa-window-maximize"></i> Tablero kanban del proyecto</p>
+                    </div>
+                    <div class="header_right">
+                      <button class="btn btn_large" data-toggle="modal" data-target="#newProyecto"><i class="fa fa-plus"></i> Crear Nuevo Proyecto</button>
+                      <button class="btn btn_large" data-toggle="modal" data-target="#uploadProyecto"><i class="fa fa-cloud-upload"></i> Subir Nuevo Proyecto</button>
+                    </div>
+                  </div>
+                  <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                              <thead>
+                                  <tr>
+                                      <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let row of tableData1.dataRows; let i = index">
+                                      <td>{{i+1}}</td>
+                                      <td *ngFor="let cell of row">{{cell}}</td>
+                                      <td>
+                                        <button class="btn btn-simple btn-icon" routerLink="/canvas"><i class="fa fa-check-square-o"></i></button>
+                                        <button class="btn btn-simple btn-icon" routerLink="/proyectDetails"><i class="fa fa-eye"></i></button>
+                                        <button class="btn btn-simple btn-icon" data-toggle="modal" data-target="#newProyecto"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-simple btn-icon"><i class="fa fa-cloud-download"></i></button>
+                                        <button class="btn btn-simple btn-icon"><i class="fa fa-refresh"></i></button>
+                                        <button class="btn btn-simple btn-icon" data-toggle="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button>                                      
+                                      </td>
+                                  </tr>
+                              </tbody>
+                        </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

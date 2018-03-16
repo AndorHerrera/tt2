@@ -1,0 +1,64 @@
+<div class="modal fade" id="newProyecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" aria-hidden="true" align="center">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" align="center">
+        <h5 *ngIf="!accion" class="modal-title" id="exampleModalLabel"><i class="fa fa-plus"></i> Crear Nuevo Proyecto</h5>
+        <h5 *ngIf="accion" class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Editar Proyecto</h5>
+        <button type="button" (click)="removeAll()" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label>Titulo</label>
+                      <input type="text" name="titulo" [(ngModel)]="titulo" class="form-control" placeholder="Titulo de proyecto">
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Tags</label>
+                    <angular2-multiselect name="selectedItems" [data]="dropdownList" [(ngModel)]="selectedItems" 
+                    [settings]="dropdownSettings" 
+                    (onSelect)="onItemSelect($event)" 
+                    (onDeSelect)="OnItemDeSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+                    (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+                  </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label>Versión</label>
+                  <input type="text" name="version" [(ngModel)]="version" class="form-control" value="1.2" readonly>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label>Estado</label>
+                  <input type="text" name="estado" [(ngModel)]="estado" class="form-control" value="En Construcción" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label>Descripción</label>
+                      <textarea rows="5" name="descripcion" [(ngModel)]="descripcion" class="form-control" placeholder="Aquí puedes escribir una descripcion breve sobre el proyecto."></textarea>
+                  </div>
+              </div>
+          </div>
+        </div>
+          <div class="modal-footer">
+            <button (click)="guardar()" type="submit" class="btn btn-info btn-fill pull-right" data-dismiss="modal" aria-label="Close">Guardar</button>
+            <button (click)="removeAll()" class="btn btn-danger btn-fill pull-right" data-dismiss="modal" aria-label="Close">Cancelar</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
