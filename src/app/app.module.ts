@@ -36,6 +36,9 @@ import { ProyectComponent } from './_modals/proyects/proyect/proyect.component';
 import { DeleteProyectComponent } from './_modals/proyects/delete-proyect/delete-proyect.component';
 import { DownloadFilesComponent } from './_modals/files/download-files/download-files.component';
 import { ProyectsService } from './proyects/proyects.service';
+import { KanbanService } from './canvas/canvas.service';
+import { HomeworkComponent } from './_modals/homeworks/homework/homework.component';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,8 @@ import { ProyectsService } from './proyects/proyects.service';
     UpFileComponent,
     ProyectComponent,
     DeleteProyectComponent,
-    DownloadFilesComponent
+    DownloadFilesComponent,
+    HomeworkComponent
 
   ],
   imports: [
@@ -74,7 +78,9 @@ import { ProyectsService } from './proyects/proyects.service';
     AngularMultiSelectModule,
   ],
   providers: [
-    ProyectsService
+    ProyectsService,
+    KanbanService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

@@ -3020,7 +3020,27 @@ input:focus {
 
 .Kanban button.btn.btn_large.back_white {
   background-color: white;
-  /* margin-left:  auto; */
-  /* margin-right:  auto; */
   margin-bottom: 25px;
+}
+
+.Kanban .card.header_kanban {
+  margin-left: -15px;
+  margin-right: -14px;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
+div#porHacer.borde_drag {
+  border: 2px solid !important;
+  border-style: dashed !important;
+}
+
+div#realiza.borde_drag {
+  border: 2px solid !important;
+  border-style: dashed !important;
+}
+
+div#enProce.borde_drag {
+  border: 2px solid !important;
+  border-style: dashed !important;
 }

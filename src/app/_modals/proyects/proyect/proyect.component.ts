@@ -1,10 +1,13 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { NgModel } from '@angular/forms';
 import { ProyectsService } from '../../../proyects/proyects.service';
 import { Proyect } from '../../../_models/proyect.model';
 import { Tag } from '../../../_models/tag.model';
 import { Select } from '../../../_models/select.model';
+import { KanbanService } from '../../../canvas/canvas.service';
+import { Kanban } from '../../../_models/kanban.model';
+import { User } from '../../../_models/user.model';
 
 @Component({
   selector: 'app-proyect',
@@ -32,7 +35,7 @@ export class ProyectComponent implements OnInit {
   @Output()
   proyectEvent = new EventEmitter();
 
-  constructor(private _proyectsService: ProyectsService) { }
+  constructor(private _proyectsService: ProyectsService, private _kabanService: KanbanService) { }
 
   ngOnInit() {
     this.dropdownSettings = { 
@@ -95,7 +98,29 @@ export class ProyectComponent implements OnInit {
       });
     }else{ // Agregar
       this._proyectsService.addProyect(this.editableItem).subscribe(response => {
-        this.proyectEvent.emit();
+        let temporalKanban: Kanban = new Kanban;
+        let usuariosKanban:User[] =[];
+        temporalKanban.proyect = response;
+        // Usuario de Sesion
+        let autorSesion:User = new User;
+        autorSesion.id = "43fe9681-dd53-4bb4-9bfe-15fe9633ad23"
+        autorSesion.name = "Salomon";
+        autorSesion.fatherLastName = "Olmedo";
+        autorSesion.motherLastName = "Garcia";
+        autorSesion.phone = "5533887728"
+        autorSesion.email = "beko@gmail.com";
+        autorSesion.gender = "M";
+        autorSesion.password = "12345";
+        autorSesion.birthday =  new Date("2018-01-17T02:03:51.000Z");
+        autorSesion.activo = true;
+        autorSesion.fechaCreacion = new Date("2018-03-11T20:27:06.000Z");
+        autorSesion.fechaModificacion = new Date("2018-03-11T20:27:06.000Z");
+        usuariosKanban.push(autorSesion);
+        temporalKanban.users = usuariosKanban;
+        console.log(response);
+        this._kabanService.addKanban(temporalKanban).subscribe(response => {
+          this.proyectEvent.emit();
+        });
       });
     }
   }

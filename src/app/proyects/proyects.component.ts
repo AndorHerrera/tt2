@@ -4,6 +4,7 @@ import { Proyect } from '../_models/proyect.model';
 import { ProyectComponent } from '../_modals/proyects/proyect/proyect.component';
 import { Select } from '../_models/select.model';
 import { Router } from '@angular/router';
+declare var $:any;
 
 declare interface TableData {
   headerRow: string[];
@@ -31,6 +32,21 @@ export class ProyectsComponent implements OnInit {
       headerRow: [ 'ID','Nombre','Ultima Actualización','Estado','Acciones'],
       dataRows: []
     };
+    this.getProyects();
+  }
+
+  elementoGuardado(){
+    $.notify({
+        icon: "pe-7s-diskette",
+        message: "<b>PROYECTO GUARDADO DE FORMA EXITOSA!!.</b>"
+    },{
+        type:'success',
+        timer: 1000,
+        placement: {
+            from: 'top',
+            align: 'right'
+        }
+    });
     this.getProyects();
   }
 

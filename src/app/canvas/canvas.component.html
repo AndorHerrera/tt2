@@ -2,7 +2,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn_large back_white"><i class="fa fa-plus"></i> Crear Nueva Tarea</button>
+                <div class="card header_kanban">
+                    <div class="descripcion_proyect" *ngIf="kanban.proyect">
+                        <p>Proyecto: {{kanban.proyect.title}} | Versión: {{kanban.proyect.version}}</p>
+                        <p>Descripción: {{kanban.proyect.description}}</p>
+                        <p>Integrantes: 
+                            <span *ngFor="let integrantes of kanban.users;let i=index;"> {{integrantes.name}} {{integrantes.fatherLastName}} / </span> 
+                        </p>
+                    </div>
+                    <button class="btn btn_large back_white" data-toggle="modal" data-target="#newTarea" (click)="newHomework()"><i class="fa fa-plus"></i> Crear Nueva Tarea</button>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -20,115 +29,56 @@
                                 <span class="k_titulo">Realizo</span>
                             </div>
                         </div>
-                        <div class="estado" id="porHacer" ondrop="drop(event)" ondragover="allowDrop(event)">
-                            <div id="t0" class="tareas" draggable="true" ondragstart="drag(event)">
-                                <div class="tarea" data-toggle="modal" data-target="#myTarea">
-                                    Modificación de clases de retiro voluntario.
-                                    <div class="footerTarea">
-                                        <div class="periodo">
-                                            <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>12 Nov - 30 Nov    
-                                        </div>
-                                        <div class="tareaResponsable">
-                                            <span class="round round-primary roundSmall">CP</span>
-                                            <span class="round round-warning roundSmall">CS</span>
-                                            <span class="round round-danger roundSmall">AS</span>
+                        <div class="estado" id="porHacer" (drop)="drop($event);soltar()" (dragover)="allowDrop($event)" [ngClass]="{'borde_drag':dragIn}">
+                            <div *ngFor="let tarea of tareasPorHacer">
+                                <div id="{{tarea.id}}" class="tareas porHacer" draggable="true" draggable="true" (dragstart)="drag($event);arrastrar(tarea)" data-toggle="modal" data-dismiss="modal" data-target="#newTarea" (click)="editar(tarea.id)">
+                                    <div class="tarea" data-toggle="modal" data-target="#myTarea">
+                                        {{tarea.title}}
+                                        <div class="footerTarea">
+                                            <div class="periodo">
+                                                <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>{{tarea.registerDate | date:'dd MMM'}} - {{tarea.deliveryDate | date:'dd MMM'}}   
+                                            </div>
+                                            <div class="tareaResponsable">
+                                                <span class="round round-primary roundSmall">{{tarea.assigned.name}} {{tarea.assigned.fatherLastName}}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="t1" class="tareas" draggable="true" ondragstart="drag(event)">
-                                <div class="tarea" data-toggle="modal" data-target="#myTarea">
-                                    Correccion de algoritmo de calculo de nomina por trabajador, horas vs actividades.
-                                    <div class="footerTarea">
-                                        <div class="periodo">
-                                            <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>18 Nov - 02 Dic    
-                                        </div>
-                                        <div class="tareaResponsable">
-                                            <span class="round round-success roundSmall">MT</span>
-                                            <span class="round round-warning roundSmall">CS</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                                <div id="t2" class="tareas" draggable="true" ondragstart="drag(event)">
-                                <div class="tarea" data-toggle="modal" data-target="#myTarea">
-                                    Eliminar estado de cuenta de la validacion del credito por titular.
-                                    <div class="footerTarea">
-                                        <div class="periodo">
-                                            <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>30 Oct - 18 Nov    
-                                        </div>
-                                        <div class="tareaResponsable">
-                                            <span class="round roundSmall">TH</span>
-                                            <span class="round round-danger roundSmall">JB</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
                         </div>
-                        <div class="estado" id="enProce" ondrop="drop(event)" ondragover="allowDrop(event)">
-                            <div id="t3" class="tareas" draggable="true" ondragstart="drag(event)">
-                                <div class="tarea" data-toggle="modal" data-target="#myTarea">
-                                    Desarrollo de algoritmo de pension por contraro terminado a mayores de sesenta.
-                                    <div class="footerTarea">
-                                        <div class="periodo">
-                                            <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>11 Oct - 12 Dic    
-                                        </div>
-                                        <div class="tareaResponsable">
-                                            <span class="round roundSmall">TH</span>
-                                            <span class="round round-success roundSmall">MT</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div id="t4" class="tareas" draggable="true" ondragstart="drag(event)">
-                                <div class="tarea" data-toggle="modal" data-target="#myTarea">
-                                    Restructuración de clases principales 
-                                    <div class="footerTarea">
-                                        <div class="periodo">
-                                            <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>04 Sep - 19 Dic    
-                                        </div>
-                                        <div class="tareaResponsable">
-                                            <span class="round roundSmall">TH</span>
-                                            <span class="round round-success roundSmall">MT</span>
-                                            <span class="round round-primary roundSmall">CP</span>
-                                            <span class="round round-warning roundSmall">CS</span>
-                                            <span class="round round-danger roundSmall">AS</span>
+                        <div class="estado" id="enProce" (drop)="drop($event);soltar()" (dragover)="allowDrop($event)" [ngClass]="{'borde_drag':dragIn}">
+                            <div *ngFor="let tarea of tareasEnProceso">
+                                <div id="{{tarea.id}}" class="tareas enProceso" draggable="true" draggable="true" (dragstart)="drag($event);arrastrar(tarea)" data-toggle="modal" data-dismiss="modal" data-target="#newTarea" (click)="editar(tarea.id)">
+                                    <div class="tarea" data-toggle="modal" data-target="#myTarea">
+                                        {{tarea.title}}
+                                        <div class="footerTarea">
+                                            <div class="periodo">
+                                                <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>{{tarea.registerDate | date:'dd MMM'}} - {{tarea.deliveryDate | date:'dd MMM'}}   
+                                            </div>
+                                            <div class="tareaResponsable">
+                                                <span class="round round-primary roundSmall">{{tarea.assigned.name}} {{tarea.assigned.fatherLastName}}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
-                        <div class="estado" id="realiza" ondrop="drop(event)" ondragover="allowDrop(event)">
-                            <div id="t5" class="tareas" draggable="true" ondragstart="drag(event)">
-                                <div class="tarea" data-toggle="modal" data-target="#myTarea">
-                                    Desarrollo de clases de credito y prestamo para tramites por titular y beneficiario.
-                                    <div class="footerTarea">
-                                        <div class="periodo">
-                                            <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>04 Sep - 19 Dic    
-                                        </div>
-                                        <div class="tareaResponsable">
-                                            <span class="round roundSmall">TH</span>
-                                            <span class="round round-warning roundSmall">CS</span>
-                                            <span class="round round-danger roundSmall">AS</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div id="t6" class="tareas" draggable="true" ondragstart="drag(event)">
-                                <div class="tarea" data-toggle="modal" data-target="#myTarea">
-                                    Estructuracion de metodos en tramites realizados por beneficiarios.
-                                    <div class="footerTarea">
-                                        <div class="periodo">
-                                            <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>04 Sep - 19 Dic    
-                                        </div>
-                                        <div class="tareaResponsable">
-                                            <span class="round roundSmall">TH</span>
-                                            <span class="round round-primary roundSmall">CP</span>
-                                            <span class="round round-danger roundSmall">AS</span>
+                        <div class="estado" id="realiza" (drop)="drop($event);soltar()" (dragover)="allowDrop($event)" [ngClass]="{'borde_drag':dragIn}">
+                            <div *ngFor="let tarea of tareasRealizadas">
+                                <div id="{{tarea.id}}" class="tareas Realizadas" draggable="true" draggable="true" (dragstart)="drag($event);arrastrar(tarea)" data-toggle="modal" data-dismiss="modal" data-target="#newTarea" (click)="editar(tarea.id)">
+                                    <div class="tarea" data-toggle="modal" data-target="#myTarea">
+                                        {{tarea.title}}
+                                        <div class="footerTarea">
+                                            <div class="periodo">
+                                                <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>{{tarea.registerDate | date:'dd MMM'}} - {{tarea.deliveryDate | date:'dd MMM'}}   
+                                            </div>
+                                            <div class="tareaResponsable">
+                                                <span class="round round-primary roundSmall">{{tarea.assigned.name}} {{tarea.assigned.fatherLastName}}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -136,3 +86,4 @@
         </div>
     </div>
 </div>
+<app-homework (homeworkEvent)="elementoGuardado()"></app-homework>

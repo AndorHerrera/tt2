@@ -13,35 +13,35 @@ export class ProyectsService {
     }
 
     getProyects(): Observable<Array<Proyect>> {
-        const url = Constants.endpoint + "/services/cat/proyects/items/";
+        const url = Constants.endpoint + "/api/proyects/";
         return this._http.get(url).map((response: Response) => {
             return <Array<Proyect>><any>response.json();
         });
     }
 
     getProyect(id:string): Observable<Proyect> {
-        const url = Constants.endpoint + "/services/cat/proyects/items/"+id;
+        const url = Constants.endpoint + "/api/proyects/"+id;
         return this._http.get(url).map((response: Response) => {
             return <Proyect><any>response.json();
         });
     }
 
     editProyect(proyect: Proyect,id:string): Observable<Array<Proyect>> {
-        const url = Constants.endpoint + "/services/cat/proyects/items/"+id;
+        const url = Constants.endpoint + "/api/proyects/"+id;
         return this._http.put(url,proyect).map((response: Response) => {
             return <Array<Proyect>><any>response.json();
         });
     }
 
-    addProyect(proyect: Proyect): Observable<Array<Proyect>> {
-        const url = Constants.endpoint + "/services/cat/proyects/items/";
+    addProyect(proyect: Proyect): Observable<Proyect> {
+        const url = Constants.endpoint + "/api/proyects/";
         return this._http.post(url,proyect).map((response: Response) => {
-            return <Array<Proyect>><any>response.json();
+            return <Proyect><any>response.json();
         });
     }
 
     getTags(): Observable<Array<Tag>> {
-        const url = Constants.endpoint + "/services/cat/tag/items/";
+        const url = Constants.endpoint + "/api/tags/";
         return this._http.get(url).map((response: Response) => {
             return <Array<Tag>><any>response.json();
         });

@@ -28,21 +28,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <script>
-            function allowDrop(ev) {
-                ev.preventDefault();
-            }
-    
-            function drag(ev) {
-                ev.dataTransfer.setData("html", ev.target.id);
-            }
-    
-            function drop(ev) {
-                ev.preventDefault();
-                var data = ev.dataTransfer.getData("html");
-                ev.target.appendChild(document.getElementById(data));
-            }
-        </script>
 </head>
 <body>
   <app-root>

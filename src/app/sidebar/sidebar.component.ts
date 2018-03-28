@@ -21,7 +21,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'help', title: 'Ayuda',  icon:'pe-7s-help1', class: '' },
     { path: 'profile', title: 'Mi Perfil',  icon:'pe-7s-user', class: '' },
     { path: 'canvas', title: 'Kanban',  icon:'pe-7s-note2', class: '' },
-    { path: 'upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
+   // { path: 'upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
 ];
 
 @Component({
