@@ -4,6 +4,7 @@ import { Proyect } from '../_models/proyect.model';
 import { ProyectComponent } from '../_modals/proyects/proyect/proyect.component';
 import { Select } from '../_models/select.model';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 declare var $:any;
 
 declare interface TableData {
@@ -25,7 +26,7 @@ export class ProyectsComponent implements OnInit {
   @ViewChild(ProyectComponent)
   modalProyects: ProyectComponent;
 
-  constructor(private _proyectsService: ProyectsService,private router:Router) { }
+  constructor(private _proyectsService: ProyectsService,private router:Router, private auth:AuthService) { }
 
   ngOnInit() {
     this.tableData1 = {
@@ -33,6 +34,7 @@ export class ProyectsComponent implements OnInit {
       dataRows: []
     };
     this.getProyects();
+    
   }
 
   elementoGuardado(){

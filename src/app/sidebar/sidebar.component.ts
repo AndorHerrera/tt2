@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -6,21 +8,22 @@ declare interface RouteInfo {
     title: string;
     icon: string;
     class: string;
+    newPath: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: 'dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
-    { path: 'user', title: 'User Profile',  icon:'pe-7s-user', class: '' },
-    { path: 'table', title: 'Table List',  icon:'pe-7s-note2', class: '' },
-    { path: 'typography', title: 'Typography',  icon:'pe-7s-news-paper', class: '' },
-    { path: 'icons', title: 'Icons',  icon:'pe-7s-science', class: '' },
-    { path: 'maps', title: 'Maps',  icon:'pe-7s-map-marker', class: '' },
-    { path: 'notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' },
-    { path: 'proyects', title: 'Mis Proyectos',  icon:'pe-7s-box2', class: '' },
-    { path: 'buys', title: 'Mis Compras',  icon:'pe-7s-credit', class: '' },
-    { path: 'market', title: 'Tienda',  icon:'pe-7s-cart', class: '' },
-    { path: 'help', title: 'Ayuda',  icon:'pe-7s-help1', class: '' },
-    { path: 'profile', title: 'Mi Perfil',  icon:'pe-7s-user', class: '' },
-    { path: 'canvas', title: 'Kanban',  icon:'pe-7s-note2', class: '' },
+    { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '', newPath:'dashboard'},
+    { path: '/user', title: 'User Profile',  icon:'pe-7s-user', class: '',newPath:'dashboard' },
+    { path: '/table', title: 'Table List',  icon:'pe-7s-note2', class: '',newPath:'dashboard' },
+    { path: '/typography', title: 'Typography',  icon:'pe-7s-news-paper', class: '',newPath:'dashboard' },
+    { path: '/icons', title: 'Icons',  icon:'pe-7s-science', class: '',newPath:'dashboard' },
+    { path: '/maps', title: 'Maps',  icon:'pe-7s-map-marker', class: '',newPath:'dashboard' },
+    { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' ,newPath:'dashboard'},
+    { path: '/proyects', title: 'Mis Proyectos',  icon:'pe-7s-box2', class: '',newPath:'dashboard'},
+    { path: '/buys', title: 'Mis Compras',  icon:'pe-7s-credit', class: '',newPath:'dashboard' },
+    { path: '/market', title: 'Tienda',  icon:'pe-7s-cart', class: '',newPath:'dashboard' },
+    { path: '/help', title: 'Ayuda',  icon:'pe-7s-help1', class: '',newPath:'dashboard' },
+    { path: '/profile', title: 'Mi Perfil',  icon:'pe-7s-user', class: '',newPath:'dashboard' },
+    { path: '/canvas', title: 'Kanban',  icon:'pe-7s-note2', class: '',newPath:'dashboard' },
    // { path: 'upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
 ];
 
@@ -30,11 +33,23 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+  profile:any;
 
-  constructor() { }
+  constructor(private auth:AuthService,private router: Router) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+      console.log(this.profile);
+
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+        console.log(this.profile);
+
+      });
+    }
   }
   isMobileMenu() {
       if ($(window).width() > 991) {
@@ -42,4 +57,9 @@ export class SidebarComponent implements OnInit {
       }
       return true;
   };
+
+  salir(){
+    this.auth.logout();
+    this.router.navigate(['/index']);
+  }
 }

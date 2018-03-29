@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,10 @@ import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 })
 export class AppComponent implements OnInit {
 
-     constructor(public location: Location) {}
+     constructor(public location: Location, public auth:AuthService) {}
 
     ngOnInit(){
+      this.auth.handleAuthentication();
     }
 
     isMap(path){

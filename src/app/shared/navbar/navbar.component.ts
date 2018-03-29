@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     // moduleId: module.id,
@@ -14,7 +16,8 @@ export class NavbarComponent implements OnInit{
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef) {
+    constructor(location: Location,  private element: ElementRef, private auth:AuthService,	private router: Router
+    ) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -24,6 +27,12 @@ export class NavbarComponent implements OnInit{
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
     }
+
+    salir(){
+        this.auth.logout();
+        this.router.navigate(['/index']);
+    }
+
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const body = document.getElementsByTagName('body')[0];
@@ -57,8 +66,15 @@ export class NavbarComponent implements OnInit{
         return "Kanban";
       if(titlee.indexOf("/proyectDetails/")!=-1)
         return "Detalle de Proyecto";
+      if(titlee.indexOf("/proyects")!=-1)
+        return "Mis Proyectos";
+      if(titlee.indexOf("/profile")!=-1)
+        return "Mi Perfil";
+      if(titlee.indexOf("/buys")!=-1)
+        return "Mis Compras";
+      if(titlee.indexOf("/market")!=-1)
+        return "Tienda de Proyectos";
     
-      console.log(titlee);
       titlee = titlee.split('/').pop();
       for(var item = 0; item < this.listTitles.length; item++){
           if(this.listTitles[item].path === titlee){

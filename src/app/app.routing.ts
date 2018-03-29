@@ -19,6 +19,8 @@ import { Profile } from 'selenium-webdriver/firefox';
 import { CanvasComponent } from 'app/canvas/canvas.component';
 import { ProfileComponent } from 'app/profile/profile.component';
 import { ProyectdetailsComponent } from './proyectdetails/proyectdetails.component';
+import { IndexComponent } from './index/index.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes =[
     { path: 'dashboard',            component: HomeComponent },
@@ -29,15 +31,20 @@ const routes: Routes =[
     { path: 'maps',                 component: MapsComponent },
     { path: 'notifications',        component: NotificationsComponent },
     { path: 'upgrade',              component: UpgradeComponent },
-    { path: 'proyects',             component: ProyectsComponent },
+    { path: 'proyects',             component: ProyectsComponent,       },
     { path: 'buys',                 component: BuysComponent },
     { path: 'market',               component: MarketComponent },
     { path: 'help',                 component: HelpComponent },
     { path: 'profile',              component: ProfileComponent },
-    { path: 'canvas/:id',           component: CanvasComponent },
+    { path: 'index',                component: IndexComponent },
+    { path: 'canvas/:id',           component: CanvasComponent,         canActivate:[AuthGuardService]},
     { path: 'proyectDetails/:id',   component: ProyectdetailsComponent },
+    { path: '**', redirectTo: 'proyects', pathMatch: 'full'},
+
     { path: '',          redirectTo: 'dashboard', pathMatch: 'full' }
 ];
+
+
 
 @NgModule({
   imports: [

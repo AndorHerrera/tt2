@@ -265,9 +265,11 @@ input:focus {
     margin-right: 10px; }
     .sidebar .logo-img img,
     .bootstrap-navbar .logo-img img {
-      width: 35px;
+      width: 36px;
       top: 11px;
-      position: absolute; }
+      position: absolute;
+      border-radius: 50px;
+      box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.38); }
   .sidebar .logo-tim,
   .bootstrap-navbar .logo-tim {
     border-radius: 50%;
@@ -3043,4 +3045,57 @@ div#realiza.borde_drag {
 div#enProce.borde_drag {
   border: 2px solid !important;
   border-style: dashed !important;
+}
+
+.con_index {
+    height: 900px;
+    background-color: #f6f6f6;
+    width: 100%;
+    height: 900px;
+    background-color: #f6f6f6;
+}
+
+.body_index {
+    padding-top: 10%;
+}
+
+.div_form {
+    max-width: 350px;
+    margin-right:  auto;
+    margin-left:  auto;
+    background-color: white;
+    border-radius:  5px;
+    text-align:  center;
+    font-size: 16px;
+    padding: 15px;
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.38);
+}
+
+button.btn.btn_login {
+    display:  block;
+    text-align:  center;
+    margin-left:  auto;
+    margin-right:  auto;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.campos_form {
+    text-align:  center;
+}
+
+.head_index {
+    margin-bottom: 25px;
+}
+
+p.etiqueta_form {
+    text-align: left;
+    padding-top: 5px;
+}
+
+input.input_form {
+    width:  100%;
+    border-bottom: 2px solid #b9b9b9;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }

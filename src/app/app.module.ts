@@ -39,6 +39,10 @@ import { ProyectsService } from './proyects/proyects.service';
 import { KanbanService } from './canvas/canvas.service';
 import { HomeworkComponent } from './_modals/homeworks/homework/homework.component';
 import { UserService } from './user/user.service';
+import { MaincontainerComponent } from './maincontainer/maincontainer.component';
+import { IndexComponent } from './index/index.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -62,8 +66,9 @@ import { UserService } from './user/user.service';
     ProyectComponent,
     DeleteProyectComponent,
     DownloadFilesComponent,
-    HomeworkComponent
-
+    HomeworkComponent,
+    MaincontainerComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +85,9 @@ import { UserService } from './user/user.service';
   providers: [
     ProyectsService,
     KanbanService,
-    UserService
+    UserService,
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
