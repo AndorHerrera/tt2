@@ -26,7 +26,7 @@
                                         <tr *ngFor="let row of proyectos; let i = index">
                                             <td>{{i+1}}</td>
                                             <td>{{row.title}}</td>
-                                            <td>{{row.fechaModificacion}}</td>
+                                            <td>{{row.fechaModificacion | date:'dd MMM'}}</td>
                                             <td>{{row.status}}</td>
                                             <td>
                                                 <button class="btn btn-simple btn-icon" (click)="verKanban(row.id)"><i class="fa fa-check-square-o"></i></button>
@@ -36,6 +36,11 @@
                                                 <button class="btn btn-simple btn-icon"><i class="fa fa-refresh"></i></button>
                                                 <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button>                                      
                                             </td>
+                                        </tr>
+                                        <tr *ngIf="proyectos==null || proyectos.length==0">
+                                            <td colspan="5" style="text-align:center"> 	
+                                                <i class="fa fa-minus-circle"></i>
+                                                 No tiene ningun proyecto creado</td>
                                         </tr>
                                     </tbody>
                                 </table>

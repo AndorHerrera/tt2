@@ -8,6 +8,9 @@ import { Select } from '../../../_models/select.model';
 import { KanbanService } from '../../../canvas/canvas.service';
 import { Kanban } from '../../../_models/kanban.model';
 import { User } from '../../../_models/user.model';
+import { ProyectDetailsService } from '../../../proyectdetails/proyectdetails.service';
+import { Folder } from '../../../_models/folder.model';
+import { Url } from '../../../_models/url.model';
 
 @Component({
   selector: 'app-proyect',
@@ -35,7 +38,8 @@ export class ProyectComponent implements OnInit {
   @Output()
   proyectEvent = new EventEmitter();
 
-  constructor(private _proyectsService: ProyectsService, private _kabanService: KanbanService) { }
+  constructor(private _proyectsService: ProyectsService, private _kabanService: KanbanService,
+              private _proyectDetailsService:ProyectDetailsService) { }
 
   ngOnInit() {
     this.dropdownSettings = { 
@@ -101,6 +105,7 @@ export class ProyectComponent implements OnInit {
         let temporalKanban: Kanban = new Kanban;
         let usuariosKanban:User[] =[];
         temporalKanban.proyect = response;
+        this.addFolderHome(response.id);
         // Usuario de Sesion
         let autorSesion:User = new User;
         autorSesion.id = "43fe9681-dd53-4bb4-9bfe-15fe9633ad23"
@@ -133,6 +138,36 @@ export class ProyectComponent implements OnInit {
     this.descripcion="";
     this.selectedItems = [];
     this.accion=false;
+  }
+
+  addFolderHome(id:string){
+    console.log("Entra a addFolderhOME ID:"+id);
+    if(id!=undefined){
+      console.log("Entra a addFolderhOME");
+      let folder:Folder = new Folder;
+      folder.idFather=id;
+      folder.idProyect=id;
+      folder.name="Home";
+      folder.path="Home";
+      folder.superFather=true;
+      this._proyectDetailsService.addFolder(folder).subscribe(response => {
+        console.log("este es el folder"+response);
+        console.log("este es el folder id"+response.id);
+        this.addFisicFolderHome(response.id);
+      });
+    }
+  }
+
+  addFisicFolderHome(id:string){
+    console.log("Entra a addFisicFolderHome ID:"+id);
+    if(id!=undefined){
+      console.log("Entra a addFisicFolderHome");
+      let formData: FormData = new FormData();
+      formData.append('url','');
+      this._proyectDetailsService.addFisicFolder(formData,id).subscribe(response => {
+        console.log(response);
+      });
+    }
   }
 
 }

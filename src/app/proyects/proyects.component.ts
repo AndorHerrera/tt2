@@ -5,6 +5,8 @@ import { ProyectComponent } from '../_modals/proyects/proyect/proyect.component'
 import { Select } from '../_models/select.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { ProyectDetailsService } from '../proyectdetails/proyectdetails.service';
+import { Folder } from '../_models/folder.model';
 declare var $:any;
 
 declare interface TableData {
@@ -20,13 +22,14 @@ declare interface TableData {
 export class ProyectsComponent implements OnInit {
   public tableData1: TableData;
   public tableData2: TableData;
-  public proyectos: Proyect[];
+  public proyectos: Proyect[] = [];
   public proyecto: Proyect;
 
   @ViewChild(ProyectComponent)
   modalProyects: ProyectComponent;
 
-  constructor(private _proyectsService: ProyectsService,private router:Router, private auth:AuthService) { }
+  constructor(private _proyectsService: ProyectsService,private router:Router, private auth:AuthService,
+              private _proyectDetailsService: ProyectDetailsService) { }
 
   ngOnInit() {
     this.tableData1 = {
@@ -89,7 +92,12 @@ export class ProyectsComponent implements OnInit {
   }
   
   verDetalle(idProyecto:string) {
-    this.router.navigate(['/proyectDetails',idProyecto]);
+    this._proyectDetailsService.getFolder(idProyecto).subscribe(response => {
+      let folder:Folder = response[0];
+      if(folder.id!=undefined){
+        this.router.navigate(['/proyectDetails',folder.id]);
+      }
+    });
 	}
 
 }

@@ -37,7 +37,7 @@ const routes: Routes =[
     { path: 'help',                 component: HelpComponent },
     { path: 'profile',              component: ProfileComponent },
     { path: 'index',                component: IndexComponent },
-    { path: 'canvas/:id',           component: CanvasComponent,         canActivate:[AuthGuardService]},
+    { path: 'canvas/:id',           component: CanvasComponent       /* canActivate:[AuthGuardService]*/},
     { path: 'proyectDetails/:id',   component: ProyectdetailsComponent },
     { path: '**', redirectTo: 'proyects', pathMatch: 'full'},
 

@@ -43,6 +43,8 @@ import { MaincontainerComponent } from './maincontainer/maincontainer.component'
 import { IndexComponent } from './index/index.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ProyectDetailsService } from './proyectdetails/proyectdetails.service';
+import { FolderComponent } from './_modals/folders/folder/folder.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { AuthGuardService } from './services/auth-guard.service';
     DownloadFilesComponent,
     HomeworkComponent,
     MaincontainerComponent,
-    IndexComponent
+    IndexComponent,
+    FolderComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +90,8 @@ import { AuthGuardService } from './services/auth-guard.service';
     KanbanService,
     UserService,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    ProyectDetailsService
   ],
   bootstrap: [AppComponent]
 })

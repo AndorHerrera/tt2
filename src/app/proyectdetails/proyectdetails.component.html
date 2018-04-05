@@ -1,5 +1,64 @@
 <app-maincontainer>
-<p>
-  proyectdetails works!
-</p>
+  <div>
+      <div class="main-content">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="card">
+                          <div class="header">
+                              <div class="header_left">
+                              <h4 class="title">Archivos</h4>
+                              <p class="category" *ngIf="folder!=undefined && folder.name!=undefined"><i class="fa fa-folder-o"></i> {{folder.name}}</p>
+                              </div>
+                              <div class="header_right">
+                              <button class="btn btn_large" data-toggle="modal" data-target="#newFolder" (click)="sendModalFolder()"><i class="fa fa-folder-open-o"></i> Crear Carpeta</button>
+                              <button class="btn btn_large" data-toggle="modal" data-target="#uploadProyecto" (click)="sendModalUploadFile()"><i class="fa fa-cloud-upload"></i> Subir Archivos</button>
+                              </div>
+                          </div>
+                          <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of cuerpoFolder">
+                                        <td *ngIf="row.idFolder!=undefined">
+                                          <i class="fa fa-file-code-o"></i> {{row.name}}                                            
+                                        </td>
+                                        <td *ngIf="row.idFolder==undefined">
+                                          <i class="fa fa-folder-o"></i> {{row.name}}
+                                        </td>
+                                        <td>
+                                          <span *ngIf="row.type==undefined">Folder</span> 
+                                          <span *ngIf="row.type!=undefined">{{row.type}}</span> 
+                                        </td>
+                                        <td>{{row.size}}</td>
+                                        <td>{{row.fechaCreacion | date:'dd MMM'}}</td>
+                                        <td>
+                                          <button class="btn btn-simple btn-icon" *ngIf="row.idFolder!=undefined" (click)="abrirArchivo(row.id)"><i class="fa fa-eye"></i></button>
+                                          <button class="btn btn-simple btn-icon" *ngIf="row.idFolder==undefined" (click)="abrirCarpeta(row.id)"><i class="fa fa-eye"></i></button>
+                                          <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#newProyecto" (click)="editar(row.id)" ><i class="fa fa-edit"></i></button>
+                                          <button class="btn btn-simple btn-icon" data-toggle="modal" data-target="#uploadProyecto" (click)="resetFiles()"><i class="fa fa-cloud-upload"></i></button>
+                                          <button class="btn btn-simple btn-icon"><i class="fa fa-refresh"></i></button>
+                                          <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button>                                      
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="cuerpoFolder.length==0 && folder!=undefined">
+                                        <td colspan="5" style="text-align:center"> 	
+                                            <i class="fa fa-minus-circle"></i>
+                                             No hay archivos que mostrar en la carpeta {{folder.name}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<app-up-file (fileEvent)="fileGuardado()"></app-up-file>
+<app-folder (folderEvent)="folderGuardado()"></app-folder>
 </app-maincontainer>
