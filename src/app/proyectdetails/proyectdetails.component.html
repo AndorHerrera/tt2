@@ -8,7 +8,7 @@
                           <div class="header">
                               <div class="header_left">
                               <h4 class="title">Archivos</h4>
-                              <p class="category" *ngIf="folder!=undefined && folder.name!=undefined"><i class="fa fa-folder-o"></i> {{folder.name}}</p>
+                              <p class="category" *ngIf="folder!=undefined && folder.name!=undefined"><i class="fa fa-folder-o"></i> <a routerLink="/proyects">Proyectos /</a><a (click)="padreRerutn()" *ngIf="padreLabel!='0'" style="cursor: pointer;">{{padreLabel}} /</a>   {{folder.name}}</p>
                               </div>
                               <div class="header_right">
                               <button class="btn btn_large" data-toggle="modal" data-target="#newFolder" (click)="sendModalFolder()"><i class="fa fa-folder-open-o"></i> Crear Carpeta</button>
@@ -19,15 +19,16 @@
                             <table class="table table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                        <th>Nombre</th>
+                                        <th *ngFor="let cell of tableData1.headerRow" style="text-align:center">{{ cell }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let row of cuerpoFolder">
-                                        <td *ngIf="row.idFolder!=undefined">
+                                    <tr *ngFor="let row of cuerpoFolder" style="text-align:center">
+                                        <td *ngIf="row.idFolder!=undefined" style="text-align:left">
                                           <i class="fa fa-file-code-o"></i> {{row.name}}                                            
                                         </td>
-                                        <td *ngIf="row.idFolder==undefined">
+                                        <td *ngIf="row.idFolder==undefined" style="text-align:left">
                                           <i class="fa fa-folder-o"></i> {{row.name}}
                                         </td>
                                         <td>
@@ -40,8 +41,6 @@
                                           <button class="btn btn-simple btn-icon" *ngIf="row.idFolder!=undefined" (click)="abrirArchivo(row.id)"><i class="fa fa-eye"></i></button>
                                           <button class="btn btn-simple btn-icon" *ngIf="row.idFolder==undefined" (click)="abrirCarpeta(row.id)"><i class="fa fa-eye"></i></button>
                                           <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#newProyecto" (click)="editar(row.id)" ><i class="fa fa-edit"></i></button>
-                                          <button class="btn btn-simple btn-icon" data-toggle="modal" data-target="#uploadProyecto" (click)="resetFiles()"><i class="fa fa-cloud-upload"></i></button>
-                                          <button class="btn btn-simple btn-icon"><i class="fa fa-refresh"></i></button>
                                           <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button>                                      
                                         </td>
                                     </tr>

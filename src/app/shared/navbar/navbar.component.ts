@@ -68,6 +68,8 @@ export class NavbarComponent implements OnInit{
         return "Detalle de Proyecto";
       if(titlee.indexOf("/proyects")!=-1)
         return "Mis Proyectos";
+      if(titlee.indexOf("/charts")!=-1)
+        return "Análisis Sonar";
       if(titlee.indexOf("/profile")!=-1)
         return "Mi Perfil";
       if(titlee.indexOf("/buys")!=-1)

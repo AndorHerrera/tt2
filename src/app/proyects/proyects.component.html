@@ -33,7 +33,8 @@
                                                 <button class="btn btn-simple btn-icon" (click)="verDetalle(row.id)"><i class="fa fa-eye"></i></button>
                                                 <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#newProyecto" (click)="editar(row.id)" ><i class="fa fa-edit"></i></button>
                                                 <button class="btn btn-simple btn-icon" data-toggle="modal" data-target="#uploadProyecto" (click)="resetFiles()"><i class="fa fa-cloud-upload"></i></button>
-                                                <button class="btn btn-simple btn-icon"><i class="fa fa-refresh"></i></button>
+                                                <button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verGraficas(row.id)"><i class="fa fa-line-chart"></i></button>
+                                                <button *ngIf="!row.sonar" class="btn btn-simple btn-icon" (click)="addSonar(row.id)"><i class="fa fa-search-plus"></i></button>
                                                 <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button>                                      
                                             </td>
                                         </tr>

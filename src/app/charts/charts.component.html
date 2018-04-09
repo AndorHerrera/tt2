@@ -1,0 +1,221 @@
+<app-maincontainer>
+  <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="div_metricas">
+                    <p *ngIf="!statusFlad" class="metricas_status_ok"><i class="fa fa-check r_5"></i>  {{bodyCharts.status}}</p>
+                    <p *ngIf="statusFlad" class="metricas_status_fail"><i class="fa fa-check r_5"></i>  {{bodyCharts.status}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="div_metricas">
+                    <h4 class=".title_metrics">Lineas efectivas de código: {{bodyCharts.ncloc}}</h4>
+                    <canvas baseChart
+                    [title]="'Lineas efectivas de código'"
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas><br/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-bug r_5"></i>  {{bodyCharts.bugs}}</p>
+                    <p class="metricas_title">Bugs</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-frown-o r_5"></i>  {{bodyCharts.apestosas}}</p>
+                    <p class="metricas_title">Lineas Apestosas</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-exclamation-triangle r_5"></i>  {{bodyCharts.vulnerabilidades}}</p>
+                    <p class="metricas_title">Vulnerabilidades</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-hand-peace-o r_5"></i> {{bodyCharts.duplicados}}</p>
+                    <p class="metricas_title">Duplicados</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-comment-o r_5"></i> {{bodyCharts.densidadComentarios}}%</p>
+                    <p class="metricas_title">Densidad de comentarios</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-list-ol r_5"></i> {{bodyCharts.pruebas}}%</p>
+                    <p class="metricas_title">Cobertura por pruebas</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-cubes r_5"></i> {{bodyCharts.bloques_repetidos}}</p>
+                    <p class="metricas_title">Bloques repetidos</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-folder r_5"></i> {{bodyCharts.directorios}}</p>
+                    <p class="metricas_title">Carpetas Totales</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="div_metricas">
+                    <div style="display: block">
+                        <h4 class=".title_metrics">Calidad de software</h4>
+                        <canvas baseChart
+                        [datasets]="radarChartData"
+                        [labels]="radarChartLabels"
+                        [colors]="radarChartColors"
+                        [chartType]="radarChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas><br/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="div_metricas">
+                    <div style="display: block">
+                        <h4 class=".title_metrics">Violaciones [{{bodyCharts.violaciones}} en total]</h4>
+                        <canvas baseChart
+                        [data]="polarAreaChartData"
+                        [labels]="polarAreaChartLabels"
+                        [legend]="polarAreaLegend"
+                        [chartType]="polarAreaChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="div_metricas">
+                    <div style="display: block">
+                        <h4 class=".title_metrics">Esfuerzo Remedial [{{bodyCharts.costoRemediarCodigo}} en total]</h4>
+                        <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="div_metricas">
+                    <div style="display: block">
+                    <h4 class=".title_metrics">Lineas de código [{{bodyCharts.lineas}} en total]</h4>
+                    <canvas baseChart
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-file-o r_5"></i> {{bodyCharts.archivos}}</p>
+                    <p class="metricas_title">Archivos</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-file-o r_5"></i> {{bodyCharts.archivosDuplicados}}</p>
+                    <p class="metricas_title">Archivos Duplicados</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-flask r_5"></i> {{bodyCharts.complejidad}}</p>
+                    <p class="metricas_title">Complejidad</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-flask r_5"></i> {{bodyCharts.complejidadCognitiva}}</p>
+                    <p class="metricas_title">Complejidad Cognitiva</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-code r_5"></i> {{bodyCharts.clases}}</p>
+                    <p class="metricas_title">Clases</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-flag-o r_5"></i> {{bodyCharts.declaraciones}}</p>
+                    <p class="metricas_title">Declaraciones</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-terminal r_5"></i> {{bodyCharts.funciones}}</p>
+                    <p class="metricas_title">Funciones</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="div_metricas">
+                    <p class="metricas_number"><i class="fa fa-exclamation-circle r_5"></i> {{bodyCharts.issuesAbiertos}}</p>
+                    <p class="metricas_title">Issues</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card table_folder_metrics">
+                    <h3>Metricas por folders</h3>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of bodyCharts.folders; let i = index">
+                                        <td style="text-align: left;">{{row.name}}</td>
+                                        <td>{{row.lineasApestosas}}</td>
+                                        <td>{{row.lineasDuplicadas}}%</td>
+                                        <td>{{row.nloc}}</td>
+                                        <td>{{row.coverage}}%</td>
+                                        <td>{{row.bugs}}</td>
+                                        <td>{{row.vulnerabilities}}</td>
+                                    </tr>
+                                    <tr *ngIf="bodyCharts.folders==null">
+                                        <td colspan="7" >El proyecto no contiene folders</td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+<div class="loader" *ngIf="blockLoader"></div>
+</app-maincontainer>

@@ -90,7 +90,20 @@ export class ProyectsComponent implements OnInit {
   verKanban(idProyecto:string) {
     this.router.navigate(['/canvas',idProyecto]);
   }
-  
+
+  verGraficas(idProyecto:string) {
+    this._proyectDetailsService.getFolder(idProyecto).subscribe(response => {
+      let folder:Folder = response[0];
+      if(folder.id!=undefined){
+        this.router.navigate(['/infoCharts',folder.id]);      
+      }
+    });
+  }
+
+  addSonar(idProyecto:string) {
+    this.router.navigate(['/validando',idProyecto]);      
+  }
+
   verDetalle(idProyecto:string) {
     this._proyectDetailsService.getFolder(idProyecto).subscribe(response => {
       let folder:Folder = response[0];

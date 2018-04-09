@@ -1,7 +1,7 @@
 export class Mesuare {
     
     metric:string;
-    value:number;
+    value:string;
     component:string;
 
 }

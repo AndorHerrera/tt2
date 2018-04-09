@@ -6,6 +6,7 @@ import { BodyFolder } from '../_models/bodyFolder.model';
 import { Files } from '../_models/files.model';
 import { UpFileComponent } from '../_modals/files/up-file/up-file.component';
 import { FolderComponent } from '../_modals/folders/folder/folder.component';
+import { Ruta } from '../_models/rutas.model';
 declare var $:any;
 declare interface TableData {
   headerRow: string[];
@@ -23,6 +24,10 @@ export class ProyectdetailsComponent implements OnInit {
   idFolder:string="";
   folder:Folder;
   cuerpoFolder:BodyFolder[] = [];
+  rutas:Ruta[]=[];
+
+  padreLabel:string;
+  padreRoot:string;
 
   @ViewChild(UpFileComponent)
   modalUpFile: UpFileComponent;
@@ -37,7 +42,7 @@ export class ProyectdetailsComponent implements OnInit {
   ngOnInit() {
     this.cuerpoFolder = [];
     this.tableData1 = {
-      headerRow: ['Nombre','Tipo','Tamaño','Creado','Acciones'],
+      headerRow: ['Tipo','Tamaño','Creado','Acciones'],
       dataRows: []
     };
     this._activaRoute.params.subscribe( params => {
@@ -51,17 +56,18 @@ export class ProyectdetailsComponent implements OnInit {
     this._proyectDetailsService.getFolderById(this.idFolder).subscribe(response => {
         this.cuerpoFolder = [];
         this.folder = response;
+        console.log(this.folder);
         this.getFolders();
-        this.getFiles();
+        this.analizaPath();
     });
   }
 
   getFolders(){
     this._proyectDetailsService.getFolder(this.folder.id).subscribe(response => {
+      this.getFiles();
       for(let x=0; x < response.length; x++){
         this.cuerpoFolder.push(response[x]);
       }
-      console.log(this.cuerpoFolder);
     });
   }
 
@@ -70,7 +76,6 @@ export class ProyectdetailsComponent implements OnInit {
       for(let x=0; x < response.length; x++){
         this.cuerpoFolder.push(response[x]);
       }
-      console.log(this.cuerpoFolder);
     });
   }
 
@@ -127,5 +132,48 @@ export class ProyectdetailsComponent implements OnInit {
     this.getFolder();
   }
 
+  padreRerutn(){
+    this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true}).then(()=>
+      this.router.navigate(["/proyectDetails",this.folder.idFather]));
+  }
+
+  analizaPath(){
+    if(this.folder.path!="Home"){
+      let paths = this.folder.path.split("/");
+      let final = paths.length - 1;
+      this.padreLabel = paths[final];
+      this.padreRoot = this.folder.idFather;
+      if(paths.length==1){
+        this.padreLabel = "Home"
+      }
+    } else {
+      this.padreLabel = "0"
+    }
+    
+    
+/*
+    // Si tiene punto es ruta de archivo, si no es de folder
+    if(path.indexOf(".")!=-1){
+      let paths = path.split("/");
+      let final = paths.length - 2;
+      for(let i=0; i<paths.length; i++){
+        let root:Ruta = new Ruta;
+        root.name = paths[final];
+        root.path = this.
+      }
+    } else {
+
+
+
+    }
+    "6a4aeff2-69aa-406d-be30-efefd9a85eb2/php"
+
+
+    "6a4aeff2-69aa-406d-be30-efefd9a85eb2/php/util/idSSL.php"
+    "6a4aeff2-69aa-406d-be30-efefd9a85eb2/views/forbidden.php"
+    "6a4aeff2-69aa-406d-be30-efefd9a85eb2/php/Proyectos/mostrarAlumnos.php"
+
+*/
+  }
 
 }

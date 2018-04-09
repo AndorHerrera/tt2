@@ -15,5 +15,5 @@ export class Proyect {
     user:User;
     status:string;
     tags?:Tag[];
-
+    sonar:boolean;
 }

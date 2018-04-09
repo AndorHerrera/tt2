@@ -10,6 +10,7 @@ import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { LbdModule } from './lbd/lbd.module';
 import { AppComponent } from './app.component';
+import { ChartsModule } from 'ng2-charts';
 
 // MultiSelected
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
@@ -45,6 +46,11 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProyectDetailsService } from './proyectdetails/proyectdetails.service';
 import { FolderComponent } from './_modals/folders/folder/folder.component';
+import { ChartsComponent } from './charts/charts.component';
+import { InfoChartsComponent } from './charts/infoCharts.component';
+import { ChartsService } from './charts/charts.service';
+import { ValidandoComponent } from './validando/validando.component';
+import { ValidandoService } from './validando/validando.service';
 
 @NgModule({
   declarations: [
@@ -71,7 +77,10 @@ import { FolderComponent } from './_modals/folders/folder/folder.component';
     HomeworkComponent,
     MaincontainerComponent,
     IndexComponent,
-    FolderComponent
+    FolderComponent,
+    ChartsComponent,
+    InfoChartsComponent,
+    ValidandoComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +93,7 @@ import { FolderComponent } from './_modals/folders/folder/folder.component';
     AppRoutingModule,
     LbdModule,
     AngularMultiSelectModule,
+    ChartsModule
   ],
   providers: [
     ProyectsService,
@@ -91,7 +101,9 @@ import { FolderComponent } from './_modals/folders/folder/folder.component';
     UserService,
     AuthService,
     AuthGuardService,
-    ProyectDetailsService
+    ProyectDetailsService,
+    ChartsService,
+    ValidandoService
   ],
   bootstrap: [AppComponent]
 })

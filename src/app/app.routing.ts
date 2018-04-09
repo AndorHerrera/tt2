@@ -21,6 +21,9 @@ import { ProfileComponent } from 'app/profile/profile.component';
 import { ProyectdetailsComponent } from './proyectdetails/proyectdetails.component';
 import { IndexComponent } from './index/index.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ChartsComponent } from './charts/charts.component';
+import { InfoChartsComponent } from './charts/infoCharts.component';
+import { ValidandoComponent } from './validando/validando.component';
 
 const routes: Routes =[
     { path: 'dashboard',            component: HomeComponent },
@@ -39,12 +42,12 @@ const routes: Routes =[
     { path: 'index',                component: IndexComponent },
     { path: 'canvas/:id',           component: CanvasComponent       /* canActivate:[AuthGuardService]*/},
     { path: 'proyectDetails/:id',   component: ProyectdetailsComponent },
+    { path: 'charts',   component: ChartsComponent },
+    { path: 'infoCharts/:id',   component: InfoChartsComponent },
+    { path: 'validando/:id',   component: ValidandoComponent },
     { path: '**', redirectTo: 'proyects', pathMatch: 'full'},
-
     { path: '',          redirectTo: 'dashboard', pathMatch: 'full' }
 ];
-
-
 
 @NgModule({
   imports: [

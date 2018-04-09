@@ -11,6 +11,7 @@ declare interface RouteInfo {
     newPath: string;
 }
 export const ROUTES: RouteInfo[] = [
+  /*
     { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '', newPath:'dashboard'},
     { path: '/user', title: 'User Profile',  icon:'pe-7s-user', class: '',newPath:'dashboard' },
     { path: '/table', title: 'Table List',  icon:'pe-7s-note2', class: '',newPath:'dashboard' },
@@ -18,12 +19,13 @@ export const ROUTES: RouteInfo[] = [
     { path: '/icons', title: 'Icons',  icon:'pe-7s-science', class: '',newPath:'dashboard' },
     { path: '/maps', title: 'Maps',  icon:'pe-7s-map-marker', class: '',newPath:'dashboard' },
     { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' ,newPath:'dashboard'},
+  */
     { path: '/proyects', title: 'Mis Proyectos',  icon:'pe-7s-box2', class: '',newPath:'dashboard'},
     { path: '/buys', title: 'Mis Compras',  icon:'pe-7s-credit', class: '',newPath:'dashboard' },
     { path: '/market', title: 'Tienda',  icon:'pe-7s-cart', class: '',newPath:'dashboard' },
     { path: '/help', title: 'Ayuda',  icon:'pe-7s-help1', class: '',newPath:'dashboard' },
     { path: '/profile', title: 'Mi Perfil',  icon:'pe-7s-user', class: '',newPath:'dashboard' },
-    { path: '/canvas', title: 'Kanban',  icon:'pe-7s-note2', class: '',newPath:'dashboard' },
+    // { path: '/canvas', title: 'Kanban',  icon:'pe-7s-note2', class: '',newPath:'dashboard' },
    // { path: 'upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
 ];
 

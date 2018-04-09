@@ -58,7 +58,9 @@ export class UpFileComponent implements OnInit {
             extension == ".java" || extension == ".class" || extension == ".jar" || extension == ".jad" ||
             // Extensiones de funtes tipograficas
             extension == ".eot" || extension == ".ttf" || extension == ".woff" || extension == ".woff2" ||
-            extension == ".otf"
+            extension == ".otf" ||
+            // Extensiones de configuraciones 
+            extension == ".mf" || extension == ".md" || extension == ".properties"
         ) {
             if(files[x1].size > 5 * 1024 * 1024){
                 error = 'Error: El documento no debe de exceder los 5mb';
