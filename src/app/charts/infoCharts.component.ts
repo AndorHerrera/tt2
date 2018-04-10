@@ -199,6 +199,8 @@ export class InfoChartsComponent implements OnInit {
       folder.id = this.sonarComponentFolders.components[j].id;
       let z = this.sonarComponentFolders.components[j].name.split("files/");
       folder.name = z[1];
+      let r = folder.name.split("/");
+      folder.name = folder.name.replace(r[0],"Home");
       for(let w=0; w < this.sonarComponentFolders.components[j].measures.length; w++){
         if(this.sonarComponentFolders.components[j].measures[w].metric=="code_smells"){
          folder.lineasApestosas = +this.sonarComponentFolders.components[j].measures[w].value;

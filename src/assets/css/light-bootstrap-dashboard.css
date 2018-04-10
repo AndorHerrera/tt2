@@ -2977,7 +2977,7 @@ input:focus {
   z-index: 0;
   width: 100%;
   text-align: left;
-  padding: 5px;
+  padding: 15px;
 }
 
 .Kanban .tarea:hover{
@@ -2996,7 +2996,7 @@ input:focus {
 
 .Kanban .footerTarea {
   font-size: 13px;
-  margin-top: 2px;
+  margin-top: 8px;
 }
 
 .Kanban .roundSmall {
@@ -3160,4 +3160,27 @@ p.metricas_status_fail {
 .div_analizando{
   text-align: center;
   padding-top: 45px;
+}
+
+.descripcion_proyect.canvas_body {
+    padding: 20px;
+}
+
+p.title_canvas {
+    font-size: 20px;
+}
+
+.card.header_kanban {
+    display:  flex;
+    justify-content:  space-between;
+}
+
+p.description_canvas {
+    color: dimgrey;
+}
+
+button.btn_k {
+    height: 50px;
+    margin-right: 25px;
+    margin-top: 45px;
 }

@@ -33,11 +33,10 @@ export class ProyectsComponent implements OnInit {
 
   ngOnInit() {
     this.tableData1 = {
-      headerRow: [ 'ID','Nombre','Ultima Actualización','Estado','Acciones'],
+      headerRow: ['Ultima Actualización','Estado','Acciones'],
       dataRows: []
     };
     this.getProyects();
-    
   }
 
   elementoGuardado(){
@@ -111,6 +110,15 @@ export class ProyectsComponent implements OnInit {
         this.router.navigate(['/proyectDetails',folder.id]);
       }
     });
-	}
+  }
+  
+
+  mouseEnter(div : string){
+    console.log("mouse enter : " + div);
+  }
+
+  mouseLeave(div : string){
+   console.log('mouse leave :' + div);
+  }
 
 }

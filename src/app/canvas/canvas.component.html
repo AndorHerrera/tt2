@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card header_kanban">
-                    <div class="descripcion_proyect" *ngIf="kanban.proyect">
-                        <p>Proyecto: {{kanban.proyect.title}} | Versión: {{kanban.proyect.version}}</p>
-                        <p>Descripción: {{kanban.proyect.description}}</p>
-                        <p>Integrantes: 
+                    <div class="descripcion_proyect canvas_body" *ngIf="kanban.proyect">
+                        <p class="title_canvas">{{kanban.proyect.title}} | Versión: {{kanban.proyect.version}}</p>
+                        <p class="description_canvas">{{kanban.proyect.description}}</p>
+                        <p class="description_canvas"><i class="fa fa-users"></i> Integrantes: 
                             <span *ngFor="let integrantes of kanban.users;let i=index;"> {{integrantes.name}} {{integrantes.fatherLastName}} / </span> 
                         </p>
                     </div>
-                    <button class="btn btn_large back_white" data-toggle="modal" data-target="#newTarea" (click)="newHomework()"><i class="fa fa-plus"></i> Crear Nueva Tarea</button>
+                    <button class="btn btn_large back_white btn_k" data-toggle="modal" data-target="#newTarea" (click)="newHomework()"><i class="fa fa-plus"></i> Crear Nueva Tarea</button>
                 </div>
             </div>
         </div>

@@ -8,40 +8,42 @@
                         <div class="header">
                             <div class="header_left">
                             <h4 class="title">Proyectos Actuales</h4>
-                            <p class="category"><i class="fa fa-window-maximize"></i> Tablero kanban del proyecto</p>
                             </div>
                             <div class="header_right">
                             <button class="btn btn_large" data-toggle="modal" data-target="#newProyecto"><i class="fa fa-plus"></i> Crear Nuevo Proyecto</button>
                             <button class="btn btn_large" data-toggle="modal" data-target="#uploadProyecto" (click)="resetFiles()"><i class="fa fa-cloud-upload"></i> Subir Archivos</button>
                             </div>
                         </div>
-                        <div class="content table-responsive table-full-width">
+                        <div class="content table-responsive table-full-width"> <br/>
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                            <th>ID</th>
+                                            <th>Nombre</th>
+                                            <th style="text-align:center" *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let row of proyectos; let i = index">
                                             <td>{{i+1}}</td>
                                             <td>{{row.title}}</td>
-                                            <td>{{row.fechaModificacion | date:'dd MMM'}}</td>
-                                            <td>{{row.status}}</td>
-                                            <td>
-                                                <button class="btn btn-simple btn-icon" (click)="verKanban(row.id)"><i class="fa fa-check-square-o"></i></button>
+                                            <td style="text-align:center">{{row.fechaModificacion | date:'mediumDate'}}</td>
+                                            <td style="text-align:center">{{row.status}}</td>
+                                            <td style="text-align:center">
+                                                <button class="btn btn-simple btn-icon" (click)="verKanban(row.id)"><i class="fa fa-check-square-o"></i> Kanban</button>
                                                 <button class="btn btn-simple btn-icon" (click)="verDetalle(row.id)"><i class="fa fa-eye"></i></button>
                                                 <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#newProyecto" (click)="editar(row.id)" ><i class="fa fa-edit"></i></button>
-                                                <button class="btn btn-simple btn-icon" data-toggle="modal" data-target="#uploadProyecto" (click)="resetFiles()"><i class="fa fa-cloud-upload"></i></button>
+                                                <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button>                                      
                                                 <button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verGraficas(row.id)"><i class="fa fa-line-chart"></i></button>
                                                 <button *ngIf="!row.sonar" class="btn btn-simple btn-icon" (click)="addSonar(row.id)"><i class="fa fa-search-plus"></i></button>
-                                                <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button>                                      
+                                                <button *ngIf="row.sonar" class="btn btn-simple btn-icon"><i class="fa fa-bug"></i></button>                                      
+                                                <button *ngIf="!row.sonar" class="btn btn-simple btn-icon" disabled><i class="fa fa-bug"></i></button>                                      
                                             </td>
                                         </tr>
                                         <tr *ngIf="proyectos==null || proyectos.length==0">
                                             <td colspan="5" style="text-align:center"> 	
                                                 <i class="fa fa-minus-circle"></i>
-                                                 No tiene ningun proyecto creado</td>
+                                                    No tiene ningun proyecto creado</td>
                                         </tr>
                                     </tbody>
                                 </table>
