@@ -24,6 +24,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { ChartsComponent } from './charts/charts.component';
 import { InfoChartsComponent } from './charts/infoCharts.component';
 import { ValidandoComponent } from './validando/validando.component';
+import { IssuesComponent } from './issues/issues.component';
 
 const routes: Routes =[
     { path: 'dashboard',            component: HomeComponent },
@@ -41,6 +42,7 @@ const routes: Routes =[
     { path: 'profile',              component: ProfileComponent },
     { path: 'index',                component: IndexComponent },
     { path: 'canvas/:id',           component: CanvasComponent       /* canActivate:[AuthGuardService]*/},
+    { path: 'issues/:id',           component: IssuesComponent       /* canActivate:[AuthGuardService]*/},
     { path: 'proyectDetails/:id',   component: ProyectdetailsComponent },
     { path: 'charts',   component: ChartsComponent },
     { path: 'infoCharts/:id',   component: InfoChartsComponent },

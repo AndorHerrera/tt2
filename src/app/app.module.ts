@@ -51,6 +51,8 @@ import { InfoChartsComponent } from './charts/infoCharts.component';
 import { ChartsService } from './charts/charts.service';
 import { ValidandoComponent } from './validando/validando.component';
 import { ValidandoService } from './validando/validando.service';
+import { IssuesComponent } from './issues/issues.component';
+import { IssuesService } from './issues/issues.service';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,8 @@ import { ValidandoService } from './validando/validando.service';
     FolderComponent,
     ChartsComponent,
     InfoChartsComponent,
-    ValidandoComponent
+    ValidandoComponent,
+    IssuesComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +106,8 @@ import { ValidandoService } from './validando/validando.service';
     AuthGuardService,
     ProyectDetailsService,
     ChartsService,
-    ValidandoService
+    ValidandoService,
+    IssuesService
   ],
   bootstrap: [AppComponent]
 })

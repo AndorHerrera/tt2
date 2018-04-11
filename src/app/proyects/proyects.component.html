@@ -36,7 +36,7 @@
                                                 <button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button>                                      
                                                 <button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verGraficas(row.id)"><i class="fa fa-line-chart"></i></button>
                                                 <button *ngIf="!row.sonar" class="btn btn-simple btn-icon" (click)="addSonar(row.id)"><i class="fa fa-search-plus"></i></button>
-                                                <button *ngIf="row.sonar" class="btn btn-simple btn-icon"><i class="fa fa-bug"></i></button>                                      
+                                                <button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verIssues(row.id)"><i class="fa fa-bug"></i></button>                                      
                                                 <button *ngIf="!row.sonar" class="btn btn-simple btn-icon" disabled><i class="fa fa-bug"></i></button>                                      
                                             </td>
                                         </tr>
