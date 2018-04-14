@@ -53,6 +53,9 @@ import { ValidandoComponent } from './validando/validando.component';
 import { ValidandoService } from './validando/validando.service';
 import { IssuesComponent } from './issues/issues.component';
 import { IssuesService } from './issues/issues.service';
+import { InicioComponent } from './inicio/inicio.component';
+import { FinComponent } from './fin/fin.component';
+import { InicioService } from './inicio/inicio.service';
 
 @NgModule({
   declarations: [
@@ -83,7 +86,9 @@ import { IssuesService } from './issues/issues.service';
     ChartsComponent,
     InfoChartsComponent,
     ValidandoComponent,
-    IssuesComponent
+    IssuesComponent,
+    InicioComponent,
+    FinComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +112,8 @@ import { IssuesService } from './issues/issues.service';
     ProyectDetailsService,
     ChartsService,
     ValidandoService,
-    IssuesService
+    IssuesService,
+    InicioService
   ],
   bootstrap: [AppComponent]
 })

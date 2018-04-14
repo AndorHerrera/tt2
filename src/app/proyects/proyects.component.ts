@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { ProyectDetailsService } from '../proyectdetails/proyectdetails.service';
 import { Folder } from '../_models/folder.model';
+import { Profile } from '../_models/profile.model';
+import { Constants } from '../constants.class';
 declare var $:any;
 
 declare interface TableData {
@@ -24,6 +26,9 @@ export class ProyectsComponent implements OnInit {
   public tableData2: TableData;
   public proyectos: Proyect[] = [];
   public proyecto: Proyect;
+  blockLoader:boolean=true;
+  profile:Profile=new Profile;
+  idUsuario:string;
 
   @ViewChild(ProyectComponent)
   modalProyects: ProyectComponent;
@@ -36,7 +41,12 @@ export class ProyectsComponent implements OnInit {
       headerRow: ['Ultima Actualización','Estado','Acciones'],
       dataRows: []
     };
-    this.getProyects();
+
+    if(Constants.profile!=null){
+      this.profile=Constants.profile;
+      this.idUsuario = this.profile.sub,
+      this.getProyects();
+    }
   }
 
   elementoGuardado(){
@@ -55,9 +65,12 @@ export class ProyectsComponent implements OnInit {
   }
 
   getProyects(){ // Obtiene los items de la tabla
-    this._proyectsService.getProyects().subscribe(response => {
+    if(this.idUsuario!=undefined){
+      this._proyectsService.getProyectsByIdUser(this.idUsuario).subscribe(response => {
         this.proyectos = response;
-    });
+        this.blockLoader =false;
+      });
+    }
   }
 
   editar(id:string){ // Obtiene los items de la tabla

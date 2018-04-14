@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Constants } from 'app/constants.class';
+import { Profile } from '../_models/profile.model';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -35,23 +37,13 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
-  profile:any;
-
+  profile:Profile = new Profile;
   constructor(private auth:AuthService,private router: Router) { }
 
   ngOnInit() {
+    this.profile = Constants.profile;
     this.menuItems = ROUTES.filter(menuItem => menuItem);
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-      console.log(this.profile);
 
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-        console.log(this.profile);
-
-      });
-    }
   }
   isMobileMenu() {
       if ($(window).width() > 991) {
@@ -62,6 +54,6 @@ export class SidebarComponent implements OnInit {
 
   salir(){
     this.auth.logout();
-    this.router.navigate(['/index']);
+    this.auth.login();
   }
 }

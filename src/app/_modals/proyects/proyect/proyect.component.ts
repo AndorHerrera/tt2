@@ -11,6 +11,8 @@ import { User } from '../../../_models/user.model';
 import { ProyectDetailsService } from '../../../proyectdetails/proyectdetails.service';
 import { Folder } from '../../../_models/folder.model';
 import { Url } from '../../../_models/url.model';
+import { Constants } from '../../../constants.class';
+import { InicioService } from '../../../inicio/inicio.service';
 
 @Component({
   selector: 'app-proyect',
@@ -39,7 +41,7 @@ export class ProyectComponent implements OnInit {
   proyectEvent = new EventEmitter();
 
   constructor(private _proyectsService: ProyectsService, private _kabanService: KanbanService,
-              private _proyectDetailsService:ProyectDetailsService) { }
+              private _proyectDetailsService:ProyectDetailsService, private _userService:InicioService) { }
 
   ngOnInit() {
     this.dropdownSettings = { 
@@ -84,6 +86,7 @@ export class ProyectComponent implements OnInit {
   }
 
   guardar(){
+    this.editableItem.idUser = Constants.profile.sub;
     this.editableItem.title = this.titulo;
     this.editableItem.status = this.estado;
     this.editableItem.description = this.descripcion;  
@@ -103,28 +106,13 @@ export class ProyectComponent implements OnInit {
     }else{ // Agregar
       this._proyectsService.addProyect(this.editableItem).subscribe(response => {
         let temporalKanban: Kanban = new Kanban;
-        let usuariosKanban:User[] =[];
         temporalKanban.proyect = response;
-        this.addFolderHome(response.id);
-        // Usuario de Sesion
-        let autorSesion:User = new User;
-        autorSesion.id = "43fe9681-dd53-4bb4-9bfe-15fe9633ad23"
-        autorSesion.name = "Salomon";
-        autorSesion.fatherLastName = "Olmedo";
-        autorSesion.motherLastName = "Garcia";
-        autorSesion.phone = "5533887728"
-        autorSesion.email = "beko@gmail.com";
-        autorSesion.gender = "M";
-        autorSesion.password = "12345";
-        autorSesion.birthday =  new Date("2018-01-17T02:03:51.000Z");
-        autorSesion.activo = true;
-        autorSesion.fechaCreacion = new Date("2018-03-11T20:27:06.000Z");
-        autorSesion.fechaModificacion = new Date("2018-03-11T20:27:06.000Z");
-        usuariosKanban.push(autorSesion);
-        temporalKanban.users = usuariosKanban;
-        console.log(response);
-        this._kabanService.addKanban(temporalKanban).subscribe(response => {
-          this.proyectEvent.emit();
+        temporalKanban.users = [];
+        this._userService.getUserBySub(Constants.profile.sub).subscribe(usuario => {
+        temporalKanban.users.push(usuario[0]);
+          this._kabanService.addKanban(temporalKanban).subscribe(respuesta => {
+            this.addFolderHome(response.id);
+          });
         });
       });
     }
@@ -141,9 +129,7 @@ export class ProyectComponent implements OnInit {
   }
 
   addFolderHome(id:string){
-    console.log("Entra a addFolderhOME ID:"+id);
     if(id!=undefined){
-      console.log("Entra a addFolderhOME");
       let folder:Folder = new Folder;
       folder.idFather=id;
       folder.idProyect=id;
@@ -151,21 +137,18 @@ export class ProyectComponent implements OnInit {
       folder.path="Home";
       folder.superFather=true;
       this._proyectDetailsService.addFolder(folder).subscribe(response => {
-        console.log("este es el folder"+response);
-        console.log("este es el folder id"+response.id);
         this.addFisicFolderHome(response.id);
       });
     }
   }
 
   addFisicFolderHome(id:string){
-    console.log("Entra a addFisicFolderHome ID:"+id);
     if(id!=undefined){
-      console.log("Entra a addFisicFolderHome");
       let formData: FormData = new FormData();
       formData.append('url','');
       this._proyectDetailsService.addFisicFolder(formData,id).subscribe(response => {
         console.log(response);
+        this.proyectEvent.emit();
       });
     }
   }

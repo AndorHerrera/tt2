@@ -18,6 +18,7 @@ declare var $:any;
 })
 export class CanvasComponent implements OnInit {
 
+  blockLoader:boolean=true;
   tarea: Homework;
   idProyecto:string="";
   idKanban:string="";
@@ -82,6 +83,7 @@ export class CanvasComponent implements OnInit {
         }
       }
     }
+    this.blockLoader=false;
   }
 
   elementoGuardado(){

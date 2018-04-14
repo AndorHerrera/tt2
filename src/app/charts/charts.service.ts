@@ -14,10 +14,14 @@ export class ChartsService {
     constructor(private _http: Http) {
     }
 
+    
+
     getMesuares(id:string): Observable<SonarComponent> {
         const url = Constants.endpoint + "/api/proyects/sonar/metricas/"+id;
         return this._http.get(url).map((response: Response) => {
-            return <SonarComponent><any>response.json();
+            if(response.toString().indexOf("{") != -1){
+                return <SonarComponent><any>response.json();
+            } 
         });
     }
 

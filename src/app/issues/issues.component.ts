@@ -14,6 +14,7 @@ export class IssuesComponent implements OnInit {
   
   idFolder:string;
   bodyIssues:BodyIssues;
+  blockLoader:boolean=true;
 
   ngOnInit() {
     this._activaRoute.params.subscribe( params => {
@@ -25,7 +26,7 @@ export class IssuesComponent implements OnInit {
   getIssues(){
     this._issuesService.getIssues(this.idFolder).subscribe(response => {
       this.bodyIssues = response;
-      console.log(this.bodyIssues);
+      this.blockLoader = false;
   });
   }
 

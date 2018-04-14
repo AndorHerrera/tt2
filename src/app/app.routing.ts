@@ -25,6 +25,8 @@ import { ChartsComponent } from './charts/charts.component';
 import { InfoChartsComponent } from './charts/infoCharts.component';
 import { ValidandoComponent } from './validando/validando.component';
 import { IssuesComponent } from './issues/issues.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { FinComponent } from './fin/fin.component';
 
 const routes: Routes =[
     { path: 'dashboard',            component: HomeComponent },
@@ -40,6 +42,8 @@ const routes: Routes =[
     { path: 'market',               component: MarketComponent },
     { path: 'help',                 component: HelpComponent },
     { path: 'profile',              component: ProfileComponent },
+    { path: 'inicio',               component: InicioComponent },
+    { path: 'fin',                  component: FinComponent },
     { path: 'index',                component: IndexComponent },
     { path: 'canvas/:id',           component: CanvasComponent       /* canActivate:[AuthGuardService]*/},
     { path: 'issues/:id',           component: IssuesComponent       /* canActivate:[AuthGuardService]*/},

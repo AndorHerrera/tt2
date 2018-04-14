@@ -55,7 +55,11 @@ export class InfoChartsComponent implements OnInit {
         this.sonarComponentDos = response;
         this._chartsService.getFolders(this.idProyect).subscribe(response => {
           this.sonarComponentFolders = response;
-          this.createGraphycs();
+          if(this.sonarComponent!=undefined){
+            this.createGraphycs();
+          } else {
+            this.verGraficas();
+          }
         });
       });
     });

@@ -19,6 +19,13 @@ export class ProyectsService {
         });
     }
 
+    getProyectsByIdUser(idUsuario:string): Observable<Array<Proyect>> {
+        const url = Constants.endpoint + "/api/proyects/user/"+idUsuario;
+        return this._http.get(url).map((response: Response) => {
+            return <Array<Proyect>><any>response.json();
+        });
+    }
+
     getProyect(id:string): Observable<Proyect> {
         const url = Constants.endpoint + "/api/proyects/"+id;
         return this._http.get(url).map((response: Response) => {

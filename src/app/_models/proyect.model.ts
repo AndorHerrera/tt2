@@ -12,7 +12,7 @@ export class Proyect {
     price:number;
     version:string;
     image:Blob;
-    user:User;
+    idUser:string;
     status:string;
     tags?:Tag[];
     sonar:boolean;

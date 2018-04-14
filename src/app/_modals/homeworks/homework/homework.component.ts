@@ -55,10 +55,11 @@ export class HomeworkComponent implements OnInit {
       if(this.editableItem!=undefined)
         this.editableItem.id = undefined;
       let autorSesion:User = new User;
-      autorSesion.id = "43fe9681-dd53-4bb4-9bfe-15fe9633ad23"
+      //autorSesion.id = "43fe9681-dd53-4bb4-9bfe-15fe9633ad23"
       autorSesion.name = "Salomon";
       autorSesion.fatherLastName = "Olmedo";
       autorSesion.motherLastName = "Garcia";
+     /*
       autorSesion.phone = "5533887728"
       autorSesion.email = "beko@gmail.com";
       autorSesion.gender = "M";
@@ -67,7 +68,7 @@ export class HomeworkComponent implements OnInit {
       autorSesion.activo = true;
       autorSesion.fechaCreacion = new Date("2018-03-11T20:27:06.000Z");
       autorSesion.fechaModificacion = new Date("2018-03-11T20:27:06.000Z");
-
+*/
       this.editableItem.author = autorSesion; 
       this.editableItem.status = "Por Hacer";
 

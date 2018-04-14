@@ -8,7 +8,7 @@
                         <p class="title_canvas">{{kanban.proyect.title}} | Versión: {{kanban.proyect.version}}</p>
                         <p class="description_canvas">{{kanban.proyect.description}}</p>
                         <p class="description_canvas"><i class="fa fa-users"></i> Integrantes: 
-                            <span *ngFor="let integrantes of kanban.users;let i=index;"> {{integrantes.name}} {{integrantes.fatherLastName}} / </span> 
+                            <span *ngFor="let integrantes of kanban.users;let i=index;"> {{integrantes.nickname}} / </span> 
                         </p>
                     </div>
                     <button class="btn btn_large back_white btn_k" data-toggle="modal" data-target="#newTarea" (click)="newHomework()"><i class="fa fa-plus"></i> Crear Nueva Tarea</button>
@@ -88,4 +88,5 @@
     </div>
 </div>
 <app-homework (homeworkEvent)="elementoGuardado()"></app-homework>
+<div class="loader" *ngIf="blockLoader"></div>
 </app-maincontainer>

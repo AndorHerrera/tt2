@@ -66,16 +66,20 @@ export class ValidandoComponent implements OnInit {
   getMesuares(){
     this._chartsService.getMesuares(this.idProyect).subscribe(response => {
       this.sonarComponent = response;
-      for(let x=0; x < this.sonarComponent.component.measures.length; x++){
-        if (this.sonarComponent.component.measures[x].metric=="alert_status"){
-          if(this.sonarComponent.component.measures[x].value=="OK"){
-            this.proyect.status = "Aprobado";
-          } else {
-            this.proyect.status = "Descartado";
-          }
-          this.proyect.sonar=true;
-          this.editProyect();
-       }
+      if(this.sonarComponent!=undefined){
+        for(let x=0; x < this.sonarComponent.component.measures.length; x++){
+          if (this.sonarComponent.component.measures[x].metric=="alert_status"){
+            if(this.sonarComponent.component.measures[x].value=="OK"){
+              this.proyect.status = "Aprobado";
+            } else {
+              this.proyect.status = "Descartado";
+            }
+            this.proyect.sonar=true;
+            this.editProyect();
+         }
+        }
+      } else {
+        this.editProyect();   
       }
     });
   }

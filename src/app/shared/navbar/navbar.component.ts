@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit{
 
     salir(){
         this.auth.logout();
-        this.router.navigate(['/index']);
+        this.auth.login();
     }
 
     sidebarOpen() {
@@ -70,6 +70,8 @@ export class NavbarComponent implements OnInit{
         return "Detalle de Proyecto";
       if(titlee.indexOf("/proyects")!=-1)
         return "Mis Proyectos";
+      if(titlee.indexOf("/issues")!=-1)
+        return "Incidencias";
       if(titlee.indexOf("/charts")!=-1)
         return "Análisis Sonar";
       if(titlee.indexOf("/profile")!=-1)

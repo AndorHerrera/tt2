@@ -15,17 +15,18 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Accion</th>
-                                        <th>Linea</th>
                                         <th>Severidad</th>
+                                        <th>Linea</th>
+                                        <th>Incidencia</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody *ngIf="bodyIssues!=undefined">
                                     <tr *ngFor="let row of bodyIssues.issues; let i = index">
                                         <td class="id_issue">{{i+1}}</td>
-                                        <td class="mensaje_issue">{{row.message}}</td>
+                                        <td>{{row.severity}}</td>
                                         <td>{{row.line}}</td>
-                                        <td>{{row.severity}}</td>                                                                           
+                                        <td class="mensaje_issue">{{row.message}}</td>
+                                                                           
                                     </tr>
                                     <tr *ngIf="bodyIssues.issues==null || bodyIssues.issues.length==0">
                                         <td colspan="5" style="text-align:center"> 	
@@ -41,4 +42,5 @@
         </div>
     </div>
 </div>
+<div class="loader" *ngIf="blockLoader"></div>
 </app-maincontainer>
