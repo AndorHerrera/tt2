@@ -57,6 +57,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { FinComponent } from './fin/fin.component';
 import { InicioService } from './inicio/inicio.service';
 import { PersonComponent } from './_modals/person/person.component';
+import { ProfileService } from './profile/profile.service';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { PersonComponent } from './_modals/person/person.component';
     ChartsService,
     ValidandoService,
     IssuesService,
-    InicioService
+    InicioService,
+    ProfileService
   ],
   bootstrap: [AppComponent]
 })
