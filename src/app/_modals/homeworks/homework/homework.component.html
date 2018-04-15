@@ -41,9 +41,8 @@
                 <div class="form-group">
                   <label>Asignado</label>
                   <select [ngModel]="asignado" (ngModelChange)="onChangeObj($event)" name="asignado" class="form-control">
-                    <option [ngValue]="user" *ngFor="let user of asignados">{{user.name}} {{user.fatherLastName}}</option>
+                    <option [ngValue]="user" *ngFor="let user of asignados">{{user.nickname}}</option>
                   </select>
-
                 </div>
               </div>
           </div>

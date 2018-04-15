@@ -28,6 +28,13 @@ export class KanbanService {
         });
     }
 
+    editKanban(kanban: Kanban,id:string): Observable<Array<Kanban>> {
+        const url = Constants.endpoint + "/api/kanbans/"+id;
+        return this._http.put(url,kanban).map((response: Response) => {
+            return <Array<Kanban>><any>response.json();
+        });
+    }
+
     // Tareas del Kanban
 
     getHomeworks(id:string): Observable<Array<HomeworkMin>> { // By idKanban

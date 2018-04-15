@@ -104,16 +104,18 @@ export class ProyectComponent implements OnInit {
         this.proyectEvent.emit();
       });
     }else{ // Agregar
-      this._proyectsService.addProyect(this.editableItem).subscribe(response => {
-        let temporalKanban: Kanban = new Kanban;
-        temporalKanban.proyect = response;
-        temporalKanban.users = [];
-        this._userService.getUserBySub(Constants.profile.sub).subscribe(usuario => {
-        temporalKanban.users.push(usuario[0]);
+      this._userService.getUserBySub(Constants.profile.sub).subscribe(usuario => {
+        this.editableItem.users = [];
+        this.editableItem.users.push(usuario[0]);
+        this._proyectsService.addProyect(this.editableItem).subscribe(response => {
+          let temporalKanban: Kanban = new Kanban;
+          temporalKanban.proyect = response;
+          temporalKanban.users = [];
+          temporalKanban.users.push(usuario[0]);
           this._kabanService.addKanban(temporalKanban).subscribe(respuesta => {
             this.addFolderHome(response.id);
           });
-        });
+        });        
       });
     }
   }

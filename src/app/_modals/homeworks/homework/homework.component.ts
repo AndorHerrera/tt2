@@ -4,6 +4,8 @@ import { User } from '../../../_models/user.model';
 import { Kanban } from '../../../_models/kanban.model';
 import { KanbanService } from '../../../canvas/canvas.service';
 import { UserService } from 'app/user/user.service';
+import { Constants } from '../../../constants.class';
+import { InicioService } from '../../../inicio/inicio.service';
 
 @Component({
   selector: 'app-homework',
@@ -30,9 +32,10 @@ export class HomeworkComponent implements OnInit {
   @Output()
   homeworkEvent = new EventEmitter();
 
-  constructor(private _kanbanService: KanbanService, private _userService: UserService) { }
+  constructor(private _kanbanService: KanbanService, private _userService: UserService,  private _infoService:InicioService) { }
 
   ngOnInit() {
+    console.log("a"+this.asignados);
   }
 
   guardar(){
@@ -54,28 +57,13 @@ export class HomeworkComponent implements OnInit {
     }else{ // Agregar
       if(this.editableItem!=undefined)
         this.editableItem.id = undefined;
-      let autorSesion:User = new User;
-      //autorSesion.id = "43fe9681-dd53-4bb4-9bfe-15fe9633ad23"
-      autorSesion.name = "Salomon";
-      autorSesion.fatherLastName = "Olmedo";
-      autorSesion.motherLastName = "Garcia";
-     /*
-      autorSesion.phone = "5533887728"
-      autorSesion.email = "beko@gmail.com";
-      autorSesion.gender = "M";
-      autorSesion.password = "12345";
-      autorSesion.birthday =  new Date("2018-01-17T02:03:51.000Z");
-      autorSesion.activo = true;
-      autorSesion.fechaCreacion = new Date("2018-03-11T20:27:06.000Z");
-      autorSesion.fechaModificacion = new Date("2018-03-11T20:27:06.000Z");
-*/
-      this.editableItem.author = autorSesion; 
-      this.editableItem.status = "Por Hacer";
-
-
-      this._kanbanService.addHomework(this.editableItem).subscribe(response => {
-        this.homeworkEvent.emit();
-      });
+        this._infoService.getUserBySub(Constants.profile.sub).subscribe(response => {
+          this.editableItem.author = response[0];
+          this.editableItem.status = "Por Hacer";
+          this._kanbanService.addHomework(this.editableItem).subscribe(response => {
+            this.homeworkEvent.emit();
+          });
+        });
     }
 
   }

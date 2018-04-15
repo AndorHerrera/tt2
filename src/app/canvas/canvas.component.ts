@@ -9,6 +9,8 @@ import { HomeworkMin } from '../_models/homework.min.model';
 import { HomeworkComponent } from '../_modals/homeworks/homework/homework.component';
 import { Homework } from '../_models/homework.model';
 import { UserService } from 'app/user/user.service';
+import { PersonComponent } from '../_modals/person/person.component';
+import { User } from '../_models/user.model';
 declare var $:any;
 
 @Component({
@@ -29,15 +31,18 @@ export class CanvasComponent implements OnInit {
   tareasEnProceso:HomeworkMin[] = [];
   dragIn:boolean=false;
   idTareaSeleccionada:string;
+  listUsers:User[] = [];
+
 
   @ViewChild(HomeworkComponent)
   modalHomeworks: HomeworkComponent;
 
+  @ViewChild(PersonComponent)
+  modalPersonal: PersonComponent;
+
   constructor(private _activaRoute: ActivatedRoute,private _kanbanService: KanbanService,private _userService: UserService) {
 
    }
-
-   
    
 
   ngOnInit() {
@@ -202,7 +207,7 @@ export class CanvasComponent implements OnInit {
   }
 
   newHomework(){
-    this.modalHomeworks.asignados = this.kanban.users;
+    this.modalHomeworks.asignados = this.kanban.proyect.users;
     this.modalHomeworks.kanban = this.kanban;
     this.modalHomeworks.accion = false;
     // Vaciar resto de parametros
@@ -213,6 +218,35 @@ export class CanvasComponent implements OnInit {
     this.modalHomeworks.descripcion = "";
     this.modalHomeworks.asignado = null;
     this.modalHomeworks.autor = null;
+  }
+
+  newPerson(){
+    this._userService.getUsers().subscribe(response => {
+      this.listUsers = response;
+      let users:User[] = this.kanban.users;
+      let c:User[] = this.listUsers.filter(function(objFromA) {
+        return !users.find(function(objFromB) {
+          return objFromA.sub === objFromB.sub
+        })
+      })
+      this.modalPersonal.listUsers = c;
+      this.modalPersonal.kanban = this.kanban;
+    });
+  }
+
+  personaGuardada(){
+    this.getKanban();
+    $.notify({
+      icon: "pe-7s-diskette",
+      message: "<b>COLABORADOR AGREGADO EXITOSAMENTE!!!.</b>"
+    },{
+        type:'success',
+        timer: 1000,
+        placement: {
+            from: 'top',
+            align: 'right'
+        }
+    });
   }
 
 }

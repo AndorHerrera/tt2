@@ -1,0 +1,29 @@
+<div class="modal fade" id="newPerson" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" aria-hidden="true" align="center">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" align="center">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-users"></i> Agregar Colaborador</h5>
+        <button type="button" (click)="removeAll()" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p style="text-align:left">Al agrear un colaborador, se compartiran automaticamnete todos los recursos del proyecto, como archivos, carpetas, tareas del kanabn y analisis.</p>
+                <div class="form-group">
+                    <label>Colaboladores</label>
+                    <select class="select_col" [ngModel]="selectedDeviceObj" (ngModelChange)="onChangeObj($event)" name="sel3">
+                      <option [ngValue]="i" *ngFor="let i of listUsers">{{i.nickname}}</option>
+                    </select>
+                </div>
+              <p *ngIf="seleccionado!=undefined">Estas a punto de compartir toda la información del proyecto con <br/> <img class="picture_integrants" src="{{seleccionado.picture}}"> <b>{{seleccionado.nickname}}</b> ¿estas seguro de querer continuar?</p>
+              <button *ngIf="seleccionado!=undefined" type="submit" class="btn btn-info btn-fill pull-right" data-dismiss="modal" aria-label="Close" (click)="save()">Agregar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

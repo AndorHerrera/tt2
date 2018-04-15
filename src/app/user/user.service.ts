@@ -19,4 +19,11 @@ export class UserService {
         });
     }
 
+    getUsers(): Observable<Array<User>> {
+        const url = Constants.endpoint + "/api/users/";
+        return this._http.get(url).map((response: Response) => {
+            return <Array<User>><any>response.json();
+        });
+    }
+
 }

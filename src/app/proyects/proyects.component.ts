@@ -9,6 +9,10 @@ import { ProyectDetailsService } from '../proyectdetails/proyectdetails.service'
 import { Folder } from '../_models/folder.model';
 import { Profile } from '../_models/profile.model';
 import { Constants } from '../constants.class';
+import { UserService } from '../user/user.service';
+import { User } from '../_models/user.model';
+import { PersonComponent } from '../_modals/person/person.component';
+import { KanbanService } from '../canvas/canvas.service';
 declare var $:any;
 
 declare interface TableData {
@@ -29,12 +33,17 @@ export class ProyectsComponent implements OnInit {
   blockLoader:boolean=true;
   profile:Profile=new Profile;
   idUsuario:string;
+  listUsers:User[] = [];
 
   @ViewChild(ProyectComponent)
   modalProyects: ProyectComponent;
 
+  @ViewChild(PersonComponent)
+  modalPersonal: PersonComponent;
+
   constructor(private _proyectsService: ProyectsService,private router:Router, private auth:AuthService,
-              private _proyectDetailsService: ProyectDetailsService) { }
+              private _proyectDetailsService: ProyectDetailsService,private _userService: UserService,
+              private _kanbanService: KanbanService) { }
 
   ngOnInit() {
     this.tableData1 = {
@@ -141,6 +150,39 @@ export class ProyectsComponent implements OnInit {
 
   mouseLeave(div : string){
    console.log('mouse leave :' + div);
+  }
+
+  newPerson(usuarios:User[],idProyecto:string){
+    console.log("usuarios: "+usuarios);
+    this._userService.getUsers().subscribe(response => {
+      this.listUsers = response;
+      let users:User[] = usuarios;
+      let c:User[] = this.listUsers.filter(function(objFromA) {
+        return !users.find(function(objFromB) {
+          return objFromA.sub === objFromB.sub
+        })
+      })
+      this.modalPersonal.listUsers = c;
+      this._kanbanService.getKanban(idProyecto).subscribe(response => {
+        let kanban = response[0];
+        this.modalPersonal.kanban = kanban;
+      });
+    });
+  }
+
+  personaGuardada(){
+    $.notify({
+      icon: "pe-7s-diskette",
+      message: "<b>COLABORADOR GUARDADO DE FORMA EXITOSA!!.</b>"
+    },{
+        type:'success',
+        timer: 1000,
+        placement: {
+            from: 'top',
+            align: 'right'
+        }
+    });
+    this.getProyects();
   }
 
 }

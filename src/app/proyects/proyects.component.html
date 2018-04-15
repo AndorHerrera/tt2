@@ -11,7 +11,6 @@
                             </div>
                             <div class="header_right">
                             <button class="btn btn_large" data-toggle="modal" data-target="#newProyecto"><i class="fa fa-plus"></i> Crear Nuevo Proyecto</button>
-                            <button class="btn btn_large" data-toggle="modal" data-target="#uploadProyecto" (click)="resetFiles()"><i class="fa fa-cloud-upload"></i> Subir Archivos</button>
                             </div>
                         </div>
                         <div class="content table-responsive table-full-width"> <br/>
@@ -37,7 +36,8 @@
                                                 <button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verGraficas(row.id)"><i class="fa fa-line-chart"></i></button>
                                                 <button *ngIf="!row.sonar" class="btn btn-simple btn-icon" (click)="addSonar(row.id)"><i class="fa fa-search-plus"></i></button>
                                                 <button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verIssues(row.id)"><i class="fa fa-bug"></i></button>                                      
-                                                <button *ngIf="!row.sonar" class="btn btn-simple btn-icon" disabled><i class="fa fa-bug"></i></button>                                      
+                                                <button *ngIf="!row.sonar" class="btn btn-simple btn-icon" disabled><i class="fa fa-bug"></i></button>                  
+                                                <button class="btn btn-simple btn-icon" (click)="newPerson(row.users,row.id)" data-toggle="modal" data-target="#newPerson"><i class="fa fa-users"></i></button>                                                                  
                                             </td>
                                         </tr>
                                         <tr *ngIf="proyectos==null || proyectos.length==0">
@@ -55,5 +55,6 @@
     </div>
 </div>
 <app-proyect (proyectEvent)="elementoGuardado()"></app-proyect>
+<app-person (personEvent)="personaGuardada()"></app-person>
 <div class="loader" *ngIf="blockLoader"></div>
 </app-maincontainer>

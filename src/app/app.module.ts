@@ -56,6 +56,7 @@ import { IssuesService } from './issues/issues.service';
 import { InicioComponent } from './inicio/inicio.component';
 import { FinComponent } from './fin/fin.component';
 import { InicioService } from './inicio/inicio.service';
+import { PersonComponent } from './_modals/person/person.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { InicioService } from './inicio/inicio.service';
     ValidandoComponent,
     IssuesComponent,
     InicioComponent,
-    FinComponent
+    FinComponent,
+    PersonComponent
   ],
   imports: [
     BrowserModule,

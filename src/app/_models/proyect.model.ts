@@ -3,6 +3,7 @@ import { Tag } from "./tag.model";
 
 export class Proyect {
 
+    users:User[];
     id:string;
     fechaCreacion:Date;
     fechaModificacion:Date;

@@ -7,11 +7,14 @@
                     <div class="descripcion_proyect canvas_body" *ngIf="kanban.proyect">
                         <p class="title_canvas">{{kanban.proyect.title}} | Versión: {{kanban.proyect.version}}</p>
                         <p class="description_canvas">{{kanban.proyect.description}}</p>
-                        <p class="description_canvas"><i class="fa fa-users"></i> Integrantes: 
-                            <span *ngFor="let integrantes of kanban.users;let i=index;"> {{integrantes.nickname}} / </span> 
+                        <p class="description_canvas"><i class="fa fa-users"></i>: 
+                            <span *ngFor="let integrantes of kanban.users;let i=index;"> <img src="{{integrantes.picture}}" class="picture_integrants"> {{integrantes.nickname}} / </span> 
                         </p>
                     </div>
-                    <button class="btn btn_large back_white btn_k" data-toggle="modal" data-target="#newTarea" (click)="newHomework()"><i class="fa fa-plus"></i> Crear Nueva Tarea</button>
+                    <div class="botones_kan">
+                        <button class="btn btn_large back_white btn_k" data-toggle="modal" data-target="#newTarea" (click)="newHomework()"><i class="fa fa-plus"></i> Crear Nueva Tarea</button>
+                        <button class="btn btn_large back_white btn_k" data-toggle="modal" data-target="#newPerson" (click)="newPerson()"><i class="fa fa-users"></i> Agregar Colaborador</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,7 +43,7 @@
                                                 <i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>{{tarea.registerDate | date:'dd MMM'}} - {{tarea.deliveryDate | date:'dd MMM'}}   
                                             </div>
                                             <div class="tareaResponsable">
-                                                <span class="round round-primary roundSmall">{{tarea.assigned.name}} {{tarea.assigned.fatherLastName}}</span>
+                                                <span class="round round-primary roundSmall"><img src="{{tarea.assigned.picture}}" class="picture_integrants"> </span>
                                             </div>
                                         </div>
                                     </div>
@@ -88,5 +91,6 @@
     </div>
 </div>
 <app-homework (homeworkEvent)="elementoGuardado()"></app-homework>
+<app-person (personEvent)="personaGuardada()"></app-person>
 <div class="loader" *ngIf="blockLoader"></div>
 </app-maincontainer>

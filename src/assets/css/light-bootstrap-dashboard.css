@@ -3184,3 +3184,19 @@ button.btn_k {
     margin-right: 25px;
     margin-top: 45px;
 }
+
+img.picture_integrants {
+  border-radius: 50px;
+  width: 30px;
+}
+
+select.select_col{
+    width:  100%;
+    border:  0;
+    height: 40px;
+
+}
+
+select.select_col:focus {
+  outline: 0;
+}
