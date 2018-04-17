@@ -102,10 +102,6 @@ constructor(private _chartsService: ChartsService,private _activaRoute: Activate
     this.blockLoader = false;
   }
 
-
-
-
-
   public chartClicked(e:any):void {
     console.log(e);
   }

@@ -11,27 +11,25 @@
                             </div>
                         </div>
                         <div class="content table-responsive table-full-width"> <br/>
-                            <table class="table table-hover table-striped">
+                            <table id="myTable" class="table table-hover table-striped">
                                 <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Severidad</th>
+                                    <tr id="forFilters">
+                                        <th>Archivo</th>
                                         <th>Linea</th>
-                                        <th>Incidencia</th>
+                                        <th>Tipo</th>
+                                        <th>Severidad</th>
+                                        <th>Incidencia</th> 
+                                        <th>Asignar</th> 
                                     </tr>
                                 </thead>
-                                <tbody *ngIf="bodyIssues!=undefined">
+                                <tbody>
                                     <tr *ngFor="let row of bodyIssues.issues; let i = index">
-                                        <td class="id_issue">{{i+1}}</td>
-                                        <td>{{row.severity}}</td>
+                                        <td>{{row.component}}</td>
                                         <td>{{row.line}}</td>
+                                        <td>{{row.type}}</td>
+                                        <td>{{row.severity}}</td>
                                         <td class="mensaje_issue">{{row.message}}</td>
-                                                                           
-                                    </tr>
-                                    <tr *ngIf="bodyIssues.issues==null || bodyIssues.issues.length==0">
-                                        <td colspan="5" style="text-align:center"> 	
-                                            <i class="fa fa-minus-circle"></i>
-                                                No tiene ninguna incidencia</td>
+                                        <td><button class="btn btn-simple btn-icon" (click)="asignarIssue(row)"><i class="fa fa-user-circle"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>

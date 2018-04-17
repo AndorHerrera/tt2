@@ -64,11 +64,15 @@ export class ValidandoComponent implements OnInit {
 
   
   getMesuares(){
-    this._chartsService.getMesuares(this.idProyect).subscribe(response => {
+    this._chartsService.getMesuares(this.idFolderMaster).subscribe(response => {
+      console.log("Esta es la respuesta del servicio metricas:"+response);
       this.sonarComponent = response;
+      console.log
       if(this.sonarComponent!=undefined){
+        console.log("Entra al if sonarComponent no undefined");
         for(let x=0; x < this.sonarComponent.component.measures.length; x++){
           if (this.sonarComponent.component.measures[x].metric=="alert_status"){
+            console.log("Entra al if de alert_status");
             if(this.sonarComponent.component.measures[x].value=="OK"){
               this.proyect.status = "Aprobado";
             } else {
@@ -79,12 +83,14 @@ export class ValidandoComponent implements OnInit {
          }
         }
       } else {
+        console.log("Entra al else sonarcomponent undefined");
         this.editProyect();   
       }
     });
   }
 
   editProyect(){ 
+    console.log("Entra a editar proyect con:"+this.proyect);
     this._proyectsService.editProyect(this.proyect,this.idProyect).subscribe(response => {
       console.log(response);
       this.router.navigate(['/infoCharts',this.idFolderMaster]);      

@@ -41,10 +41,6 @@ export class ProyectdetailsComponent implements OnInit {
 
   ngOnInit() {
     this.cuerpoFolder = [];
-    this.tableData1 = {
-      headerRow: ['Tipo','Tamaño','Creado','Acciones'],
-      dataRows: []
-    };
     this._activaRoute.params.subscribe( params => {
       this.idFolder = params['id'];
       this.getFolder();
@@ -56,7 +52,6 @@ export class ProyectdetailsComponent implements OnInit {
     this._proyectDetailsService.getFolderById(this.idFolder).subscribe(response => {
         this.cuerpoFolder = [];
         this.folder = response;
-        console.log(this.folder);
         this.getFolders();
         this.analizaPath();
     });
@@ -76,6 +71,7 @@ export class ProyectdetailsComponent implements OnInit {
       for(let x=0; x < response.length; x++){
         this.cuerpoFolder.push(response[x]);
       }
+      this.cargaTabla();
     });
   }
 
@@ -114,6 +110,7 @@ export class ProyectdetailsComponent implements OnInit {
             align: 'right'
         }
     });
+    $('#myTable').DataTable().destroy();
     this.getFolder();
   }
 
@@ -129,6 +126,7 @@ export class ProyectdetailsComponent implements OnInit {
             align: 'right'
         }
     });
+    $('#myTable').DataTable().destroy();
     this.getFolder();
   }
 
@@ -149,31 +147,34 @@ export class ProyectdetailsComponent implements OnInit {
     } else {
       this.padreLabel = "0"
     }
-    
-    
-/*
-    // Si tiene punto es ruta de archivo, si no es de folder
-    if(path.indexOf(".")!=-1){
-      let paths = path.split("/");
-      let final = paths.length - 2;
-      for(let i=0; i<paths.length; i++){
-        let root:Ruta = new Ruta;
-        root.name = paths[final];
-        root.path = this.
-      }
-    } else {
+  }
 
-
-
-    }
-    "6a4aeff2-69aa-406d-be30-efefd9a85eb2/php"
-
-
-    "6a4aeff2-69aa-406d-be30-efefd9a85eb2/php/util/idSSL.php"
-    "6a4aeff2-69aa-406d-be30-efefd9a85eb2/views/forbidden.php"
-    "6a4aeff2-69aa-406d-be30-efefd9a85eb2/php/Proyectos/mostrarAlumnos.php"
-
-*/
+  cargaTabla(){
+    setTimeout(function () {
+      $('#myTable').DataTable({
+        "aLengthMenu": [[10, 25, 100, -1], [10, 25, 100, "Todos"]],
+        "iDisplayLength": 10,
+        "aoColumns": [{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }],
+          "oLanguage": {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ ",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+             "sPrevious": "Anterior",
+             "sNext": "Siguiente"
+            },
+         }
+      });
+    }, 1);
   }
 
 }

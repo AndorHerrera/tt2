@@ -66,7 +66,6 @@ export class AuthService {
     if (!accessToken) {
       throw new Error('Access Token must exist to fetch profile');
     }
-  
     const self = this;
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
@@ -75,6 +74,21 @@ export class AuthService {
       cb(err, profile);
     });
   }
+
+  public getProfileComplete(cb): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('Access Token must exist to fetch profile');
+    }
+    const self = this;
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        self.userProfile = profile;
+      }
+      cb(err, profile);
+    });
+  }
+
 
 
 }

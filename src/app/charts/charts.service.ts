@@ -19,9 +19,9 @@ export class ChartsService {
     getMesuares(id:string): Observable<SonarComponent> {
         const url = Constants.endpoint + "/api/proyects/sonar/metricas/"+id;
         return this._http.get(url).map((response: Response) => {
-            if(response.toString().indexOf("{") != -1){
+            //if(response.toString().indexOf("{") != -1){
                 return <SonarComponent><any>response.json();
-            } 
+            //} 
         });
     }
 

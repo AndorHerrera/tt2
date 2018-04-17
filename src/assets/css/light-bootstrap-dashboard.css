@@ -3199,3 +3199,36 @@ select.select_col{
 select.select_col:focus {
   outline: 0;
 }
+
+
+div.dataTables_wrapper {
+  padding: 20px;
+}
+
+input[type="search"] {
+  width:  300px;
+}
+
+input[type="search"] {
+  background-color: #f9f9f9;
+  border: 1px solid #a0a0a0;
+  border-radius: 4px;
+  color: #565656;
+  padding: 8px 12px;
+  -webkit-box-shadow: none;
+}
+
+.dataTable select {
+    height: 25px;
+    display: -webkit-box;
+    width: 100%;
+    text-align:  center;
+}
+
+.dataTable select:focus{
+	outline:0px;
+}
+
+th.sorting {
+    text-align: center;
+}
