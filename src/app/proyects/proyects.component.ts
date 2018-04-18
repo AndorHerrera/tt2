@@ -144,6 +144,10 @@ export class ProyectsComponent implements OnInit {
       }
     });
   }
+
+  assessment(idProyecto:string){
+    this.router.navigate(['/assessment',idProyecto]);      
+  }
   
 
   mouseEnter(div : string){
@@ -192,7 +196,7 @@ export class ProyectsComponent implements OnInit {
       $('#myTable').DataTable({
         "aLengthMenu": [[10, 25, 100, -1], [10, 25, 100, "Todos"]],
         "iDisplayLength": 5,
-        "aoColumns": [{ "bSortable": false },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }],
+        "aoColumns": [{ "bSortable": false },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": true }],
           "oLanguage": {
             "sProcessing":     "Procesando...",
             "sLengthMenu":     "Mostrar _MENU_ ",

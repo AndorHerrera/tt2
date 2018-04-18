@@ -29,6 +29,7 @@
                                             <th>Análisis</th>                                
                                             <th>Bugs</th>                                
                                             <th>Compartir</th>                                
+                                            <th>Valor</th>                                
                                         </tr>
                                     </thead>
                                 <tbody>
@@ -43,7 +44,8 @@
                                         <td style="text-align:center"><button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button> </td>
                                         <td style="text-align:center"><button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verGraficas(row.id)"><i class="fa fa-line-chart"></i></button><button *ngIf="!row.sonar" class="btn btn-simple btn-icon" (click)="addSonar(row.id)"><i class="fa fa-search-plus"></i></button></td>
                                         <td style="text-align:center"><button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verIssues(row.id)"><i class="fa fa-bug"></i></button><button *ngIf="!row.sonar" class="btn btn-simple btn-icon" disabled><i class="fa fa-bug"></i></button></td>
-                                        <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="newPerson(row.users,row.id)" data-toggle="modal" data-target="#newPerson"><i class="fa fa-users"></i></button></td>
+                                        <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="newPerson(row.users,row.id)" data-toggle="modal" data-target="#newPerson"><i class="fa fa-share"></i></button></td>
+                                        <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="assessment(row.id)"><i class="fa fa-usd"></i> Valorar</button></td>
                                     </tr>
                                 </tbody>
                             </table>

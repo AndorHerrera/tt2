@@ -1,0 +1,96 @@
+<app-maincontainer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card top100">
+            <h3>Valoración del proyecto {{proyecto.title}}</h3>
+            <div class="contenedor">
+              <div class="dosLados">
+                <div class="left">
+                  <div class="cont_left">
+                    <div class="cont_img">
+                      <img class="img_sp" src="../assets/img/sp.png">
+                    </div>
+                    <div class="cont_cant">
+                      <p class="etiqueta_public">Publicación por</p>
+                      <h2 class="totalPoints">{{precioSP}} </h2>
+                      <p class="etiqueta_text">Software Points</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="content table-responsive table-full-width"> 
+                    <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <td>Mantenibilidad</td>
+                            <td>Seguridad</td>
+                            <td>Confianbilidad</td>
+                            <td>No Duplicados</td>
+                            <td>Cobertura de Pruebas</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{mantenibilidad}}%</td>
+                            <td>{{seguridad}}%</td>
+                            <td>{{confiabilidad}}%</td>
+                            <td>{{noDuplicados}}%</td>
+                            <td>{{coberturaPruebas}}%</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <td>Esfuerzo</td>
+                            <td>Tiempo de Desarrollo</td>
+                            <td>Equipo</td>
+                            <td>Lineas de Código</td>
+                            <td>Modelo</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{esfuerzo}}</td>
+                            <td>{{tdev}}</td>
+                            <td>{{costoH}}</td>
+                            <td>{{ncloc}}</td>
+                            <td>Organico</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                </div> 
+              </div>
+          </div>
+          <div class="propuesta">
+            <div class="content table-responsive table-full-width"> 
+              <table class="table table-hover table-striped tabla_valorizacion">
+                <tbody>
+                  <tr>
+                    <td>Recompensa por publicación</td>
+                    <td>Software Points por publicarlo en la tienda.</td>
+                    <td>$ {{precioSP}} SP</td>
+                  </tr>
+                  <tr>
+                    <td>Precio en la tienda</td>
+                    <td>Software Points necesarios para comprarlo en la tienda.</td>
+                    <td>$ {{precioSP}} SP</td>
+                  </tr>
+                  <tr>
+                    <td>Comisión por descarga</td>
+                    <td>Comisión por cada descarga del proyecto.</td>
+                    <td>$ {{precioSP*0.15}} SP</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="boton_cangeo"><i class="fa fa-shopping-cart"></i> Publicar en la tienda </button>
+            </div>
+          </div>        
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="loader" *ngIf="blockLoader"></div>
+</app-maincontainer>

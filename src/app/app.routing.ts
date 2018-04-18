@@ -27,6 +27,8 @@ import { ValidandoComponent } from './validando/validando.component';
 import { IssuesComponent } from './issues/issues.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { FinComponent } from './fin/fin.component';
+import { AssessmentComponent } from './assessment/assessment.component';
+import { MovementsComponent } from './movements/movements.component';
 
 const routes: Routes =[
     { path: 'dashboard',            component: HomeComponent },
@@ -48,11 +50,13 @@ const routes: Routes =[
     { path: 'canvas/:id',           component: CanvasComponent       /* canActivate:[AuthGuardService]*/},
     { path: 'issues/:id',           component: IssuesComponent       /* canActivate:[AuthGuardService]*/},
     { path: 'proyectDetails/:id',   component: ProyectdetailsComponent },
-    { path: 'charts',   component: ChartsComponent },
-    { path: 'infoCharts/:id',   component: InfoChartsComponent },
-    { path: 'validando/:id',   component: ValidandoComponent },
-    { path: '**', redirectTo: 'proyects', pathMatch: 'full'},
-    { path: '',          redirectTo: 'dashboard', pathMatch: 'full' }
+    { path: 'charts',               component: ChartsComponent },
+    { path: 'infoCharts/:id',       component: InfoChartsComponent },
+    { path: 'assessment/:id',       component: AssessmentComponent },
+    { path: 'validando/:id',        component: ValidandoComponent },
+    { path: 'movements',            component: MovementsComponent },
+    { path: '**', redirectTo: 'index', pathMatch: 'full'},
+    { path: '',   redirectTo: 'index', pathMatch: 'full' }
 ];
 
 @NgModule({

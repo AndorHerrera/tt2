@@ -58,6 +58,9 @@ import { FinComponent } from './fin/fin.component';
 import { InicioService } from './inicio/inicio.service';
 import { PersonComponent } from './_modals/person/person.component';
 import { ProfileService } from './profile/profile.service';
+import { AssignedComponent } from './_modals/homeworks/assigned/assigned.component';
+import { AssessmentComponent } from './assessment/assessment.component';
+import { MovementsComponent } from './movements/movements.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +94,10 @@ import { ProfileService } from './profile/profile.service';
     IssuesComponent,
     InicioComponent,
     FinComponent,
-    PersonComponent
+    PersonComponent,
+    AssignedComponent,
+    AssessmentComponent,
+    MovementsComponent
   ],
   imports: [
     BrowserModule,

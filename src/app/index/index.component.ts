@@ -13,10 +13,10 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.login();
   }
 
   login(){
-    this.auth.login();
     this.auth.login();
   }
 

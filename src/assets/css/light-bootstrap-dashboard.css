@@ -3232,3 +3232,70 @@ input[type="search"] {
 th.sorting {
     text-align: center;
 }
+
+.card.top100 {padding:  30px;margin-top:  40px;text-align:  center;}
+
+.contenedor {
+    margin-top: 40px;
+}
+
+.dosLados {
+    display:  flex;
+    flex-direction:  row;
+}
+
+.left {
+    width:  50%;
+}
+
+.cont_left {
+    display:  flex;
+    flex-direction:  row;
+}
+
+.right {
+    width:  50%;
+}
+
+.cont_img {
+    width:  50%;
+}
+
+img.img_sp {
+    width: 80%;
+}
+
+.cont_cant {
+    width: 50%;
+    text-align: left;
+    margin-top: 25px;
+}
+
+h2.totalPoints {
+    font-size: 80px;
+    margin-top: -15px;
+    font-family:  sans-serif;
+}
+
+p.etiqueta_text {
+    font-size: 26px;
+    font-weight: bold;
+    font-family:  monospace;
+    margin-top: -25px;
+    color: #797979;
+}
+
+p.etiqueta_public {
+  font-size: 25px;
+}
+
+button.boton_cangeo {
+  border-radius: 10px;
+}
+
+table.table.table-hover.table-striped.tabla_valorizacion {
+  WIDTH: 700PX;
+  margin-left:  auto;
+  margin-right: auto;
+  text-align: left;
+}
