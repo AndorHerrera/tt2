@@ -3,6 +3,7 @@ import { Constants } from '../constants.class';
 import { Profile } from 'app/_models/profile.model';
 import { BuysService } from './buys.service';
 import { Proyect } from '../_models/proyect.model';
+import { Buy } from '../_models/buy.model';
 declare var $:any;
 
 declare interface TableData {
@@ -21,7 +22,7 @@ export class BuysComponent implements OnInit {
 
   profile:Profile=new Profile;
   idUsuario:string;
-  public buys: Proyect[] = [];
+  public buys: Buy[] = [];
   blockLoader:boolean=true;
 
 
@@ -35,7 +36,7 @@ export class BuysComponent implements OnInit {
 
   getBuys(){
     if(this.idUsuario!=undefined){
-      this._buysService.getBuysByIdUser(this.idUsuario).subscribe(response => {
+      this._buysService.getBuysBySub(this.idUsuario).subscribe(response => {
         this.buys = response;
         $('#myTable').DataTable().destroy();
         this.cargaTabla();
