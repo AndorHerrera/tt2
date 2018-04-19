@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Constants } from '../constants.class';
+import { Profile } from 'app/_models/profile.model';
+import { BuysService } from './buys.service';
+import { Proyect } from '../_models/proyect.model';
+declare var $:any;
 
 declare interface TableData {
   headerRow: string[];
@@ -11,34 +16,60 @@ declare interface TableData {
   styleUrls: ['./buys.component.scss']
 })
 export class BuysComponent implements OnInit {
-  public tableData1: TableData;
-  public tableData2: TableData;
 
-  constructor() { }
+  constructor(private _buysService: BuysService) { }
+
+  profile:Profile=new Profile;
+  idUsuario:string;
+  public buys: Proyect[] = [];
+  blockLoader:boolean=true;
+
 
   ngOnInit() {
-    this.tableData1 = {
-      headerRow: [ 'ID','Nombre','Ultima Actualización','Estado','Acciones'],
-      dataRows: [
-          ['Módulos de Tienda Online',          '21/08/2017', 'Publicado'],
-          ['Módulo de Iniciar Sesión',          '21/08/2017', 'Validando'],
-          ['Proyecto Banco',                    '21/08/2017', 'Aprobado'],
-          ['Drag & drop',                       '21/08/2017', 'Validando'],
-          ['Proyecto Carrito de compras',       '21/08/2017', 'No aprobado'],
-          ['Utilización de la API Google Maps', '21/08/2017', 'Validando']
-      ]
-    };
-    this.tableData2 = {
-        headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
-        dataRows: [
-            ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
-            ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
-            ['3', 'Sage Rodriguez', '$56,142', 'Netherlands', 'Baileux' ],
-            ['4', 'Philip Chaney', '$38,735', 'Korea, South', 'Overland Park' ],
-            ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
-            ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
-        ]
-    };
+    if(Constants.profile!=null){
+      this.profile=Constants.profile;
+      this.idUsuario = this.profile.sub,
+      this.getBuys();
+    }
+  }
+
+  getBuys(){
+    if(this.idUsuario!=undefined){
+      this._buysService.getBuysByIdUser(this.idUsuario).subscribe(response => {
+        this.buys = response;
+        $('#myTable').DataTable().destroy();
+        this.cargaTabla();
+        this.blockLoader =false;
+      });
+    }
+  }
+
+  cargaTabla(){
+    setTimeout(function () {
+      $('#myTable').DataTable({
+        "aLengthMenu": [[10, 25, 100, -1], [10, 25, 100, "Todos"]],
+        "iDisplayLength": 5,
+        "aoColumns": [{ "bSortable": false },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": true }],
+          "oLanguage": {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ ",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+             "sPrevious": "Anterior",
+             "sNext": "Siguiente"
+            },
+         }
+      });
+    }, 1);
   }
 
 }

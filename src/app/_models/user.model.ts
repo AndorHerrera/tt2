@@ -1,5 +1,5 @@
 export class User {
-
+    id:string;
     sub:string;
     nickname:string;
     name:string;

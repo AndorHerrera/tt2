@@ -5,14 +5,10 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                        <div class="header_left">
-                            <h4 class="title">Movimientos</h4>
-                            <p class="category"><i class="fa fa-window-maximize"></i> Tablero kanban del proyecto</p>
-                        </div>
-                        <div class="header_right">
-                            <button class="btn btn_large" data-toggle="modal" data-target="#newProyecto"><i class="fa fa-plus"></i> Crear Nuevo Proyecto</button>
-                            <button class="btn btn_large" data-toggle="modal" data-target="#uploadProyecto"><i class="fa fa-cloud-upload"></i> Subir Nuevo Proyecto</button>
-                        </div>
+                            <div class="header_left">
+                                <h4 class="title">Proyectos Compatidos Conmigo</h4>
+                                <p class="category"> Todos los proyectos creados por otros usuarios y compartidos contigo apareceran en esta sección.</p>
+                            </div>
                         </div>
                         <div class="content table-responsive table-full-width"> 
                         <table id="myTable" class="table table-hover table-striped">
@@ -24,31 +20,20 @@
                                         <th>Estatus</th>
                                         <th>Kanban</th>                                
                                         <th>Ver</th>                                
-                                        <th>Editar</th>                                
-                                        <th>Eliminar</th>                                
                                         <th>Análisis</th>                                
                                         <th>Bugs</th>                                
-                                        <th>Compartir</th>                                
-                                        <th>Valor</th>                                
                                     </tr>
                                 </thead>
                             <tbody>
-                                <tr *ngFor="let row of proyectos; let i = index">
+                                <tr *ngFor="let row of buys; let i = index">
                                     <td>{{i+1}}</td>
                                     <td>{{row.title}}</td>
                                     <td style="text-align:center">{{row.fechaModificacion | date:'mediumDate'}}</td>
                                     <td style="text-align:center">{{row.status}}</td>
                                     <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="verKanban(row.id)"><i class="fa fa-check-square-o"></i></button></td>
                                     <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="verDetalle(row.id)"><i class="fa fa-eye"></i></button></td>
-                                    <td style="text-align:center"><button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#newProyecto" (click)="editar(row.id)" ><i class="fa fa-edit"></i></button></td>
-                                    <td style="text-align:center"><button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button> </td>
                                     <td style="text-align:center"><button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verGraficas(row.id)"><i class="fa fa-line-chart"></i></button><button *ngIf="!row.sonar" class="btn btn-simple btn-icon" (click)="addSonar(row.id)"><i class="fa fa-search-plus"></i></button></td>
                                     <td style="text-align:center"><button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verIssues(row.id)"><i class="fa fa-bug"></i></button><button *ngIf="!row.sonar" class="btn btn-simple btn-icon" disabled><i class="fa fa-bug"></i></button></td>
-                                    <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="newPerson(row.users,row.id)" data-toggle="modal" data-target="#newPerson"><i class="fa fa-share"></i></button></td>
-                                    <td style="text-align:center">
-                                        <button *ngIf="row.price==undefined" class="btn btn-simple btn-icon" (click)="assessment(row.id)"><i class="fa fa-usd"></i> Valorar</button>
-                                        <span *ngIf="row.price!=undefined">${{row.price}} YP</span>
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>

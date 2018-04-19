@@ -29,6 +29,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { FinComponent } from './fin/fin.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { MovementsComponent } from './movements/movements.component';
+import { ProyectsharesComponent } from './proyectshares/proyectshares.component';
 
 const routes: Routes =[
     { path: 'dashboard',            component: HomeComponent },
@@ -40,6 +41,7 @@ const routes: Routes =[
     { path: 'notifications',        component: NotificationsComponent },
     { path: 'upgrade',              component: UpgradeComponent },
     { path: 'proyects',             component: ProyectsComponent,       },
+    { path: 'proyectshares',        component: ProyectsharesComponent,       },
     { path: 'buys',                 component: BuysComponent },
     { path: 'market',               component: MarketComponent },
     { path: 'help',                 component: HelpComponent },

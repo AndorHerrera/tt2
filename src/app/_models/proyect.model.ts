@@ -17,4 +17,6 @@ export class Proyect {
     status:string;
     tags?:Tag[];
     sonar:boolean;
+    priceMarket?:number;
+    commission?:number;
 }

@@ -76,16 +76,16 @@
                   <tr>
                     <td>Precio en la tienda</td>
                     <td>Software Points necesarios para comprarlo en la tienda.</td>
-                    <td>$ {{precioSP}} SP</td>
+                    <td>$ {{precioMarket}} SP</td>
                   </tr>
                   <tr>
                     <td>Comisión por descarga</td>
                     <td>Comisión por cada descarga del proyecto.</td>
-                    <td>$ {{precioSP*0.15}} SP</td>
+                    <td>$ {{commission}} SP</td>
                   </tr>
                 </tbody>
               </table>
-              <button class="boton_cangeo"><i class="fa fa-shopping-cart"></i> Publicar en la tienda </button>
+              <button class="boton_cangeo" (click)="publicar()"> Publicar en la tienda <i class="fa fa-shopping-cart"></i></button>
             </div>
           </div>        
           </div>

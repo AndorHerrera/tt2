@@ -61,6 +61,12 @@ export class NavbarComponent implements OnInit{
 
     getTitle(){
       var titlee = this.location.prepareExternalUrl(this.location.path());
+
+
+      if(titlee.indexOf("/proyectshares")!=-1)
+        return "Proyectos Compartidos Conmigo";
+      if(titlee.indexOf("/movements")!=-1)
+        return "Movimientos";
       if(titlee.indexOf("/canvas/")!=-1)
         return "Tablero Kanban";
       if(titlee.indexOf("/assessment/")!=-1)
@@ -81,6 +87,7 @@ export class NavbarComponent implements OnInit{
         return "Mis Compras";
       if(titlee.indexOf("/market")!=-1)
         return "Tienda de Proyectos";
+
       titlee = titlee.split('/').pop();
       for(var item = 0; item < this.listTitles.length; item++){
           if(this.listTitles[item].path === titlee){

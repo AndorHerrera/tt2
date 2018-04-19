@@ -23,11 +23,14 @@ export const ROUTES: RouteInfo[] = [
     { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' ,newPath:'dashboard'},
   */
     { path: '/proyects', title: 'Mis Proyectos',  icon:'pe-7s-box2', class: '',newPath:'dashboard'},
+    { path: '/proyectshares', title: 'Proyectos Compartidos',  icon:'pe-7s-share', class: '',newPath:'dashboard'},
     { path: '/buys', title: 'Mis Compras',  icon:'pe-7s-credit', class: '',newPath:'dashboard' },
-    { path: '/market', title: 'Tienda',  icon:'pe-7s-cart', class: '',newPath:'dashboard' },
     { path: '/movements', title: 'Movimientos',  icon:'pe-7s-calculator', class: '',newPath:'dashboard' },
+    { path: '/market', title: 'Tienda',  icon:'pe-7s-cart', class: '',newPath:'dashboard' },
     { path: '/help', title: 'Ayuda',  icon:'pe-7s-help1', class: '',newPath:'dashboard' },
     { path: '/profile', title: 'Mi Perfil',  icon:'pe-7s-user', class: '',newPath:'dashboard' },
+    { path: '/profile', title: 'Salir',  icon:'pe-7s-back-2', class: '',newPath:'dashboard' },
+
     // { path: '/canvas', title: 'Kanban',  icon:'pe-7s-note2', class: '',newPath:'dashboard' },
    // { path: 'upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
 ];

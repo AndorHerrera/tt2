@@ -1,36 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { MovementsService } from './movements.service';
-import { Constants } from '../constants.class';
+import { ProyectsharesService } from './proyectshares.service';
 import { Profile } from '../_models/profile.model';
 import { Proyect } from '../_models/proyect.model';
+import { Constants } from '../constants.class';
+import { InicioService } from '../inicio/inicio.service';
+import { User } from '../_models/user.model';
+import { Router } from '@angular/router';
+import { Folder } from '../_models/folder.model';
+import { ProyectDetailsService } from '../proyectdetails/proyectdetails.service';
 declare var $:any;
 
 @Component({
-  selector: 'app-movements',
-  templateUrl: './movements.component.html',
-  styleUrls: ['./movements.component.scss']
+  selector: 'app-proyectshares',
+  templateUrl: './proyectshares.component.html',
+  styleUrls: ['./proyectshares.component.scss']
 })
-export class MovementsComponent implements OnInit {
+export class ProyectsharesComponent implements OnInit {
 
-  constructor(private _movementsService: MovementsService) { }
+
+  constructor(private _proyectsharesService: ProyectsharesService,private _infoService:InicioService,private router:Router, private _proyectDetailsService: ProyectDetailsService) { }
 
   profile:Profile=new Profile;
   idUsuario:string;
   public buys: Proyect[] = [];
   blockLoader:boolean=true;
-
+  usuario:User = new User;
 
   ngOnInit() {
     if(Constants.profile!=null){
       this.profile=Constants.profile;
       this.idUsuario = this.profile.sub,
-      this.getBuys();
+      this.getUser();
     }
   }
 
+  getUser(){
+    this._infoService.getUserBySub(Constants.profile.sub).subscribe(response => {
+      this.usuario = response[0];
+      this.getBuys();
+    });
+  }
+
   getBuys(){
-    if(this.idUsuario!=undefined){
-      this._movementsService.getMovementsByIdUser(this.idUsuario).subscribe(response => {
+    if(this.usuario.id!=undefined){
+      this._proyectsharesService.getProyectsSharesById(this.usuario.id).subscribe(response => {
         this.buys = response;
         $('#myTable').DataTable().destroy();
         this.cargaTabla();
@@ -39,12 +52,25 @@ export class MovementsComponent implements OnInit {
     }
   }
 
+  verKanban(idProyecto:string) {
+    this.router.navigate(['/canvas',idProyecto]);
+  }
+
+  verDetalle(idProyecto:string) {
+    this._proyectDetailsService.getFolder(idProyecto).subscribe(response => {
+      let folder:Folder = response[0];
+      if(folder.id!=undefined){
+        this.router.navigate(['/proyectDetails',folder.id]);
+      }
+    });
+  }
+
   cargaTabla(){
     setTimeout(function () {
       $('#myTable').DataTable({
         "aLengthMenu": [[10, 25, 100, -1], [10, 25, 100, "Todos"]],
         "iDisplayLength": 5,
-        "aoColumns": [{ "bSortable": false },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": true }],
+        "aoColumns": [{ "bSortable": false },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }],
           "oLanguage": {
             "sProcessing":     "Procesando...",
             "sLengthMenu":     "Mostrar _MENU_ ",
@@ -66,4 +92,5 @@ export class MovementsComponent implements OnInit {
       });
     }, 1);
   }
+
 }

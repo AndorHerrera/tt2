@@ -12,13 +12,16 @@ declare var $:any;
 })
 export class IssuesComponent implements OnInit {
 
-  constructor(private _activaRoute: ActivatedRoute, private _issuesService:IssuesService) { }
+  constructor(private _activaRoute: ActivatedRoute, private _issuesService:IssuesService) { 
+    this.blockLoader = true;
+  }
   
   idFolder:string;
   bodyIssues:BodyIssues;
   blockLoader:boolean=true;
 
   ngOnInit() {
+    this.blockLoader=true;
     this._activaRoute.params.subscribe( params => {
       this.idFolder = params['id'];
       this.getIssues();
@@ -55,7 +58,6 @@ export class IssuesComponent implements OnInit {
       }
       $('#myTable').DataTable().destroy();
       this.cargaTabla();
-      this.blockLoader = false;
   });
   }
 
@@ -64,6 +66,7 @@ export class IssuesComponent implements OnInit {
   }
 
   cargaTabla(){
+    this.blockLoader = false;
     setTimeout(function () {
       var table = $('#myTable').DataTable({
         "aLengthMenu": [[10, 25, 100, -1], [10, 25, 100, "Todos"]],
@@ -102,7 +105,8 @@ export class IssuesComponent implements OnInit {
                   });
               }
           });
-      }});},1);
+      }});
+    },1);
   }
 
 

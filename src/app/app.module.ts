@@ -61,6 +61,10 @@ import { ProfileService } from './profile/profile.service';
 import { AssignedComponent } from './_modals/homeworks/assigned/assigned.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { MovementsComponent } from './movements/movements.component';
+import { BuysService } from './buys/buys.service';
+import { MovementsService } from './movements/movements.service';
+import { ProyectsharesComponent } from './proyectshares/proyectshares.component';
+import { ProyectsharesService } from './proyectshares/proyectshares.service';
 
 @NgModule({
   declarations: [
@@ -97,7 +101,8 @@ import { MovementsComponent } from './movements/movements.component';
     PersonComponent,
     AssignedComponent,
     AssessmentComponent,
-    MovementsComponent
+    MovementsComponent,
+    ProyectsharesComponent
   ],
   imports: [
     BrowserModule,
@@ -123,7 +128,10 @@ import { MovementsComponent } from './movements/movements.component';
     ValidandoService,
     IssuesService,
     InicioService,
-    ProfileService
+    ProfileService,
+    BuysService,
+    MovementsService,
+    ProyectsharesService
   ],
   bootstrap: [AppComponent]
 })

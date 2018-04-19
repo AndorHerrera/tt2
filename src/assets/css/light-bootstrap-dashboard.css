@@ -3280,7 +3280,7 @@ h2.totalPoints {
 p.etiqueta_text {
     font-size: 26px;
     font-weight: bold;
-    font-family:  monospace;
+    font-family: Helvetica;
     margin-top: -25px;
     color: #797979;
 }
@@ -3291,6 +3291,13 @@ p.etiqueta_public {
 
 button.boton_cangeo {
   border-radius: 10px;
+  color: white;
+  background-color: #54b2df;
+  font-size: 18px;
+  padding: 10px;
+  border:  0;
+  width: 250px;
+  margin-top: 10px;
 }
 
 table.table.table-hover.table-striped.tabla_valorizacion {
@@ -3298,4 +3305,8 @@ table.table.table-hover.table-striped.tabla_valorizacion {
   margin-left:  auto;
   margin-right: auto;
   text-align: left;
+}
+
+button.boton_cangeo:focus {
+  outline: 0;
 }
