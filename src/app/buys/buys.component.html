@@ -16,35 +16,24 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Fecha de Creacion</th>
+                                    <th>Fecha de Compra</th>
                                     <th>Estatus</th>
-                                    <th>Kanban</th>                                
+                                    <th>Precio Comprado</th>                                
                                     <th>Ver</th>                                
-                                    <th>Editar</th>                                
-                                    <th>Eliminar</th>                                
                                     <th>Análisis</th>                                
                                     <th>Bugs</th>                                
-                                    <th>Compartir</th>                                
-                                    <th>Valor</th>                                
                                 </tr>
                             </thead>
                         <tbody>
                             <tr *ngFor="let row of buys; let i = index">
                                 <td>{{i+1}}</td>
                                 <td>{{row.proyect.title}}</td>
-                                <td style="text-align:center">{{row.proyect.fechaModificacion | date:'mediumDate'}}</td>
+                                <td style="text-align:center">{{row.fechaCreacion | date:'mediumDate'}}</td>
                                 <td style="text-align:center">{{row.proyect.status}}</td>
-                                <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="verKanban(row.id)"><i class="fa fa-check-square-o"></i></button></td>
-                                <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="verDetalle(row.id)"><i class="fa fa-eye"></i></button></td>
-                                <td style="text-align:center"><button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#newProyecto" (click)="editar(row.id)" ><i class="fa fa-edit"></i></button></td>
-                                <td style="text-align:center"><button class="btn btn-simple btn-icon" data-toggle="modal" data-dismiss="modal" data-target="#deleteProyecto"><i class="fa fa-trash-o"></i></button> </td>
-                                <td style="text-align:center"><button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verGraficas(row.id)"><i class="fa fa-line-chart"></i></button><button *ngIf="!row.sonar" class="btn btn-simple btn-icon" (click)="addSonar(row.id)"><i class="fa fa-search-plus"></i></button></td>
-                                <td style="text-align:center"><button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verIssues(row.id)"><i class="fa fa-bug"></i></button><button *ngIf="!row.sonar" class="btn btn-simple btn-icon" disabled><i class="fa fa-bug"></i></button></td>
-                                <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="newPerson(row.users,row.id)" data-toggle="modal" data-target="#newPerson"><i class="fa fa-share"></i></button></td>
-                                <td style="text-align:center">
-                                    <button *ngIf="row.price==undefined" class="btn btn-simple btn-icon" (click)="assessment(row.id)"><i class="fa fa-usd"></i> Valorar</button>
-                                    <span *ngIf="row.price!=undefined">${{row.proyect.price}} YP</span>
-                                </td>
+                                <td style="text-align:center"><span *ngIf="row.price!=undefined">${{row.proyect.price}} YP</span></td>
+                                <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="verDetalle(row.proyect.id)"><i class="fa fa-eye"></i></button></td>
+                                <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="verGraficas(row.proyect.id)"><i class="fa fa-line-chart"></i></button></td>
+                                <td style="text-align:center"><button *ngIf="row.sonar" class="btn btn-simple btn-icon" (click)="verIssues(row.proyect.id)"><i class="fa fa-bug"></i></button><button *ngIf="!row.sonar" class="btn btn-simple btn-icon" disabled><i class="fa fa-bug"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
