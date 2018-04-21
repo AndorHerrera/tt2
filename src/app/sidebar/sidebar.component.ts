@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { Constants } from 'app/constants.class';
 import { Profile } from '../_models/profile.model';
+import { SessionService } from '../services/sessionService.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -42,10 +42,10 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
   profile:Profile = new Profile;
-  constructor(private auth:AuthService,private router: Router) { }
+  constructor(private auth:AuthService,private router: Router, private _sessionService: SessionService) { }
 
   ngOnInit() {
-    this.profile = Constants.profile;
+    this.profile = this._sessionService.getUser();
     this.menuItems = ROUTES.filter(menuItem => menuItem);
 
   }
@@ -57,6 +57,7 @@ export class SidebarComponent implements OnInit {
   };
 
   salir(){
+    this._sessionService.clearUser();
     this.auth.logout();
     this.auth.login();
   }

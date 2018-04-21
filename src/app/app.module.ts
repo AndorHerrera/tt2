@@ -65,6 +65,8 @@ import { BuysService } from './buys/buys.service';
 import { MovementsService } from './movements/movements.service';
 import { ProyectsharesComponent } from './proyectshares/proyectshares.component';
 import { ProyectsharesService } from './proyectshares/proyectshares.service';
+import { SessionService } from './services/sessionService.service';
+import { CookieService } from 'angular2-cookie/services';
 
 @NgModule({
   declarations: [
@@ -131,7 +133,9 @@ import { ProyectsharesService } from './proyectshares/proyectshares.service';
     ProfileService,
     BuysService,
     MovementsService,
-    ProyectsharesService
+    ProyectsharesService,
+    SessionService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

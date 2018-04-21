@@ -8,11 +8,11 @@ import { AuthService } from '../services/auth.service';
 import { ProyectDetailsService } from '../proyectdetails/proyectdetails.service';
 import { Folder } from '../_models/folder.model';
 import { Profile } from '../_models/profile.model';
-import { Constants } from '../constants.class';
 import { UserService } from '../user/user.service';
 import { User } from '../_models/user.model';
 import { PersonComponent } from '../_modals/person/person.component';
 import { KanbanService } from '../canvas/canvas.service';
+import { SessionService } from '../services/sessionService.service';
 declare var $:any;
 
 declare interface TableData {
@@ -43,7 +43,7 @@ export class ProyectsComponent implements OnInit {
 
   constructor(private _proyectsService: ProyectsService,private router:Router, private auth:AuthService,
               private _proyectDetailsService: ProyectDetailsService,private _userService: UserService,
-              private _kanbanService: KanbanService) { }
+              private _kanbanService: KanbanService, private _sessionService: SessionService) { }
 
   ngOnInit() {
     this.tableData1 = {
@@ -51,11 +51,11 @@ export class ProyectsComponent implements OnInit {
       dataRows: []
     };
 
-    if(Constants.profile!=null){
-      this.profile=Constants.profile;
-      this.idUsuario = this.profile.sub,
-      this.getProyects();
+    if(this._sessionService.getUser()!=null){
+      this.idUsuario = this._sessionService.getUser().sub;
+      this.getProyectsFist();
     }
+    
   }
 
   elementoGuardado(){
@@ -71,6 +71,16 @@ export class ProyectsComponent implements OnInit {
         }
     });
     this.getProyects();
+  }
+
+  getProyectsFist(){ // Obtiene los items de la tabla
+    if(this.idUsuario!=undefined){
+      this._proyectsService.getProyectsByIdUser(this.idUsuario).subscribe(response => {
+        this.proyectos = response;
+        this.cargaTabla();
+        this.blockLoader =false;
+      });
+    }
   }
 
   getProyects(){ // Obtiene los items de la tabla

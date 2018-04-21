@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MovementsService } from './movements.service';
-import { Constants } from '../constants.class';
 import { Profile } from '../_models/profile.model';
 import { Proyect } from '../_models/proyect.model';
+import { SessionService } from '../services/sessionService.service';
 declare var $:any;
 
 @Component({
@@ -12,7 +12,7 @@ declare var $:any;
 })
 export class MovementsComponent implements OnInit {
 
-  constructor(private _movementsService: MovementsService) { }
+  constructor(private _movementsService: MovementsService,private _sessionService: SessionService) { }
 
   profile:Profile=new Profile;
   idUsuario:string;
@@ -21,9 +21,8 @@ export class MovementsComponent implements OnInit {
 
 
   ngOnInit() {
-    if(Constants.profile!=null){
-      this.profile=Constants.profile;
-      this.idUsuario = this.profile.sub,
+    if(this._sessionService.getUser()!=null){
+      this.idUsuario = this._sessionService.getUser().sub;
       this.getBuys();
     }
   }
