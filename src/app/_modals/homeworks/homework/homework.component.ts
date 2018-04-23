@@ -4,8 +4,8 @@ import { User } from '../../../_models/user.model';
 import { Kanban } from '../../../_models/kanban.model';
 import { KanbanService } from '../../../canvas/canvas.service';
 import { UserService } from 'app/user/user.service';
-import { Constants } from '../../../constants.class';
 import { InicioService } from '../../../inicio/inicio.service';
+import { SessionService } from '../../../services/sessionService.service';
 
 @Component({
   selector: 'app-homework',
@@ -32,7 +32,8 @@ export class HomeworkComponent implements OnInit {
   @Output()
   homeworkEvent = new EventEmitter();
 
-  constructor(private _kanbanService: KanbanService, private _userService: UserService,  private _infoService:InicioService) { }
+  constructor(private _kanbanService: KanbanService, private _userService: UserService,  
+              private _infoService:InicioService,  private _sessionService: SessionService) { }
 
   ngOnInit() {
     console.log("a"+this.asignados);
@@ -57,7 +58,7 @@ export class HomeworkComponent implements OnInit {
     }else{ // Agregar
       if(this.editableItem!=undefined)
         this.editableItem.id = undefined;
-        this._infoService.getUserBySub(Constants.profile.sub).subscribe(response => {
+        this._infoService.getUserBySub(this._sessionService.getUser().sub).subscribe(response => {
           this.editableItem.author = response[0];
           this.editableItem.status = "Por Hacer";
           this._kanbanService.addHomework(this.editableItem).subscribe(response => {

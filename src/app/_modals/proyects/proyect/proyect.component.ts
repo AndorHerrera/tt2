@@ -11,8 +11,8 @@ import { User } from '../../../_models/user.model';
 import { ProyectDetailsService } from '../../../proyectdetails/proyectdetails.service';
 import { Folder } from '../../../_models/folder.model';
 import { Url } from '../../../_models/url.model';
-import { Constants } from '../../../constants.class';
 import { InicioService } from '../../../inicio/inicio.service';
+import { SessionService } from '../../../services/sessionService.service';
 
 @Component({
   selector: 'app-proyect',
@@ -41,7 +41,8 @@ export class ProyectComponent implements OnInit {
   proyectEvent = new EventEmitter();
 
   constructor(private _proyectsService: ProyectsService, private _kabanService: KanbanService,
-              private _proyectDetailsService:ProyectDetailsService, private _userService:InicioService) { }
+              private _proyectDetailsService:ProyectDetailsService, private _userService:InicioService,
+              private _sessionService: SessionService) { }
 
   ngOnInit() {
     this.dropdownSettings = { 
@@ -86,7 +87,7 @@ export class ProyectComponent implements OnInit {
   }
 
   guardar(){
-    this.editableItem.idUser = Constants.profile.sub;
+    this.editableItem.idUser = this._sessionService.getUser().sub;
     this.editableItem.title = this.titulo;
     this.editableItem.status = this.estado;
     this.editableItem.description = this.descripcion;  
@@ -104,7 +105,7 @@ export class ProyectComponent implements OnInit {
         this.proyectEvent.emit();
       });
     }else{ // Agregar
-      this._userService.getUserBySub(Constants.profile.sub).subscribe(usuario => {
+      this._userService.getUserBySub(this._sessionService.getUser().sub).subscribe(usuario => {
         this.editableItem.users = [];
         this.editableItem.users.push(usuario[0]);
         this._proyectsService.addProyect(this.editableItem).subscribe(response => {

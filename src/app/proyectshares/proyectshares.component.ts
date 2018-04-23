@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ProyectsharesService } from './proyectshares.service';
 import { Profile } from '../_models/profile.model';
 import { Proyect } from '../_models/proyect.model';
-import { Constants } from '../constants.class';
 import { InicioService } from '../inicio/inicio.service';
 import { User } from '../_models/user.model';
 import { Router } from '@angular/router';
 import { Folder } from '../_models/folder.model';
 import { ProyectDetailsService } from '../proyectdetails/proyectdetails.service';
+import { SessionService } from '../services/sessionService.service';
 declare var $:any;
 
 @Component({
@@ -18,7 +18,9 @@ declare var $:any;
 export class ProyectsharesComponent implements OnInit {
 
 
-  constructor(private _proyectsharesService: ProyectsharesService,private _infoService:InicioService,private router:Router, private _proyectDetailsService: ProyectDetailsService) { }
+  constructor(private _proyectsharesService: ProyectsharesService,private _infoService:InicioService,
+              private router:Router, private _proyectDetailsService: ProyectDetailsService,
+              private _sessionService: SessionService) { }
 
   profile:Profile=new Profile;
   idUsuario:string;
@@ -27,15 +29,14 @@ export class ProyectsharesComponent implements OnInit {
   usuario:User = new User;
 
   ngOnInit() {
-    if(Constants.profile!=null){
-      this.profile=Constants.profile;
-      this.idUsuario = this.profile.sub,
+    if(this._sessionService.getUser()!=null){
+      this.idUsuario = this._sessionService.getUser().sub;
       this.getUser();
     }
   }
 
   getUser(){
-    this._infoService.getUserBySub(Constants.profile.sub).subscribe(response => {
+    this._infoService.getUserBySub(this._sessionService.getUser().sub).subscribe(response => {
       this.usuario = response[0];
       this.getBuys();
     });

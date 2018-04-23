@@ -22,6 +22,7 @@
         "@angular/router": "^4.0.0",
         "ajv": "^6.4.0",
         "angular-2-dropdown-multiselect": "^1.7.0",
+        "angular2-cookie": "^1.2.6",
         "angular2-multiselect-dropdown": "^2.5.0",
         "arrive": "^2.4.1",
         "auth0-js": "^9.4.1",

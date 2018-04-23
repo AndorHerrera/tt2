@@ -6,5 +6,5 @@ export class Buy {
     id:string;
     proyect:Proyect;
     user:User;
-
+    fechaCreacion:Date;
 }

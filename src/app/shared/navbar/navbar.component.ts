@@ -3,6 +3,7 @@ import { ROUTES } from '../../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { SessionService } from '../../services/sessionService.service';
 
 @Component({
     // moduleId: module.id,
@@ -16,7 +17,8 @@ export class NavbarComponent implements OnInit{
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef, private auth:AuthService,	private router: Router
+    constructor(location: Location,  private element: ElementRef, private auth:AuthService,	
+              private router: Router, private _sessionService: SessionService
     ) {
       this.location = location;
           this.sidebarVisible = false;
@@ -29,6 +31,7 @@ export class NavbarComponent implements OnInit{
     }
 
     salir(){
+        this._sessionService.clearUser();
         this.auth.logout();
         this.auth.login();
     }
