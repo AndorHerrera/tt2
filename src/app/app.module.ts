@@ -65,6 +65,7 @@ import { BuysService } from './buys/buys.service';
 import { MovementsService } from './movements/movements.service';
 import { ProyectsharesComponent } from './proyectshares/proyectshares.component';
 import { ProyectsharesService } from './proyectshares/proyectshares.service';
+import { MarketDetailComponent } from './marketdetail/marketdetail.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { ProyectsharesService } from './proyectshares/proyectshares.service';
     AssignedComponent,
     AssessmentComponent,
     MovementsComponent,
-    ProyectsharesComponent
+    ProyectsharesComponent,
+    MarketDetailComponent
   ],
   imports: [
     BrowserModule,

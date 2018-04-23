@@ -87,6 +87,8 @@ export class NavbarComponent implements OnInit{
         return "Mis Compras";
       if(titlee.indexOf("/market")!=-1)
         return "Tienda de Proyectos";
+      if(titlee.indexOf("/help")!=-1)
+        return "Ayuda";
 
       titlee = titlee.split('/').pop();
       for(var item = 0; item < this.listTitles.length; item++){
