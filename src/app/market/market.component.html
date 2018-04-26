@@ -1,5 +1,13 @@
 <app-maincontainer>
     <div class="container">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" class="form-control" #titleInput>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" (click) = 'addTodo(titleInput.value)'>BUSCAR</button>
+                </span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-4" *ngFor="let proy of proys">
                 <div class="card">
