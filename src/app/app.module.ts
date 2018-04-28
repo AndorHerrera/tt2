@@ -67,6 +67,7 @@ import { ProyectsharesComponent } from './proyectshares/proyectshares.component'
 import { ProyectsharesService } from './proyectshares/proyectshares.service';
 import { SessionService } from './services/sessionService.service';
 import { CookieService } from 'angular2-cookie/services';
+import { MarketDetailComponent } from 'app/marketdetail/marketdetail.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { CookieService } from 'angular2-cookie/services';
     AssignedComponent,
     AssessmentComponent,
     MovementsComponent,
-    ProyectsharesComponent
+    ProyectsharesComponent,
+    MarketDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import { ProyectsComponent } from 'app/proyects/proyects.component';
 import { BuysComponent } from 'app/buys/buys.component';
 import { MarketComponent } from 'app/market/market.component';
+import { MarketDetailComponent} from 'app/marketdetail/marketdetail.component'; 
 import { HelpComponent } from 'app/help/help.component';
 import { Profile } from 'selenium-webdriver/firefox';
 import { CanvasComponent } from 'app/canvas/canvas.component';
@@ -44,6 +45,7 @@ const routes: Routes =[
     { path: 'proyectshares',        component: ProyectsharesComponent,       },
     { path: 'buys',                 component: BuysComponent },
     { path: 'market',               component: MarketComponent },
+    { path: 'marketdetail/:id',     component: MarketDetailComponent},
     { path: 'help',                 component: HelpComponent },
     { path: 'profile',              component: ProfileComponent },
     { path: 'inicio',               component: InicioComponent },

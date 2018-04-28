@@ -1,3 +1,28 @@
 <app-maincontainer>
-<h1>MARKET</h1>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" class="form-control" #titleInput>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" (click) = 'addTodo(titleInput.value)'>BUSCAR</button>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let proy of proys">
+                <div class="card">
+                    <img class="card-img-top" src="assets/img/{{proy.img}}" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-title">{{proy.title}}</p>
+                        <p class="card-text">{{proy.desc}}</p>
+                        <p class="card-text" id="price">{{proy.points}} SP</p>
+                        <a routerLink="/marketdetail/{{proy.id}}" class="btn btn-primary" id="bot">Ver más</a>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="card-link" *ngFor="let tag of proy.tags">#{{tag}} </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </app-maincontainer>
