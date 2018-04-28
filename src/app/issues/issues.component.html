@@ -22,14 +22,14 @@
                                         <th>Asignar</th> 
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody *ngIf="bodyIssues!=undefined">
                                     <tr *ngFor="let row of bodyIssues.issues; let i = index">
                                         <td>{{row.component}}</td>
                                         <td>{{row.line}}</td>
                                         <td>{{row.type}}</td>
                                         <td>{{row.severity}}</td>
                                         <td class="mensaje_issue">{{row.message}}</td>
-                                        <td><button class="btn btn-simple btn-icon" (click)="asignarIssue(row)"><i class="fa fa-user-circle"></i></button></td>
+                                        <td><button class="btn btn-simple btn-icon" (click)="asignarIssue(row)" data-toggle="modal" data-dismiss="modal" data-target="#newTarea"><i class="fa fa-user-circle"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -40,5 +40,6 @@
         </div>
     </div>
 </div>
+<app-homework (homeworkEvent)="elementoGuardado()"></app-homework>
 <div class="loader" *ngIf="blockLoader"></div>
 </app-maincontainer>

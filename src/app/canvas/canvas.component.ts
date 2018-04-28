@@ -207,7 +207,7 @@ export class CanvasComponent implements OnInit {
   }
 
   newHomework(){
-    this.modalHomeworks.asignados = this.kanban.proyect.users;
+    this.modalHomeworks.asignados = this.kanban.users;
     this.modalHomeworks.kanban = this.kanban;
     this.modalHomeworks.accion = false;
     // Vaciar resto de parametros

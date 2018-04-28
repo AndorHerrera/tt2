@@ -125,12 +125,7 @@ export class ProyectsComponent implements OnInit {
   }
 
   verIssues(idProyecto:string){
-    this._proyectDetailsService.getFolder(idProyecto).subscribe(response => {
-      let folder:Folder = response[0];
-      if(folder.id!=undefined){
-        this.router.navigate(['/issues',folder.id]);      
-      }
-    });
+    this.router.navigate(['/issues',idProyecto]);
   }
 
   verGraficas(idProyecto:string) {
