@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IssuesService } from './issues.service';
 import { BodyIssues } from '../_models/bodyIssues.model';
 import { Issues } from '../_models/Issues.model';
+import { HomeworkComponent } from '../_modals/homeworks/homework/homework.component';
+import { ProyectDetailsService } from '../proyectdetails/proyectdetails.service';
+import { Folder } from '../_models/folder.model';
+import { KanbanService } from '../canvas/canvas.service';
+import { Kanban } from '../_models/kanban.model';
 declare var $:any;
 
 @Component({
@@ -12,21 +17,43 @@ declare var $:any;
 })
 export class IssuesComponent implements OnInit {
 
-  constructor(private _activaRoute: ActivatedRoute, private _issuesService:IssuesService) { 
+  constructor(private _activaRoute: ActivatedRoute, private _issuesService:IssuesService, 
+    private router:Router,private _proyectDetailsService: ProyectDetailsService, private _kanbanService: KanbanService) { 
     this.blockLoader = true;
   }
   
+  idProyect:string;
   idFolder:string;
+  kanban:Kanban = new Kanban;
   bodyIssues:BodyIssues;
   blockLoader:boolean=true;
+
+  @ViewChild(HomeworkComponent)
+  modalHomeworks: HomeworkComponent;
 
   ngOnInit() {
     this.blockLoader=true;
     this._activaRoute.params.subscribe( params => {
-      this.idFolder = params['id'];
-      this.getIssues();
+      this.idProyect = params['id'];
+      this.getFolder();
     });
   }
+
+  getFolder(){
+    this._proyectDetailsService.getFolder(this.idProyect).subscribe(response => {
+      let folder:Folder = response[0];
+      this.idFolder = folder.id;
+      this.getKanban();
+    });
+  }
+
+  getKanban(){ // Obtiene los items de la tabla
+    this._kanbanService.getKanban(this.idProyect).subscribe(response => {
+        this.kanban = response[0];
+        console.log("Este es el kanban"+this.kanban.proyect.id);
+        this.getIssues();
+    });
+  } 
 
   getIssues(){
     this._issuesService.getIssues(this.idFolder).subscribe(response => {
@@ -62,7 +89,27 @@ export class IssuesComponent implements OnInit {
   }
 
   asignarIssue(issue:Issues){
+    this.modalHomeworks.asignados = this.kanban.users;
+    this.modalHomeworks.kanban = this.kanban;
+    this.modalHomeworks.titulo = "Resolver Incidencia:" + issue.message;
+    this.modalHomeworks.descripcion = "Incidencia de tipo " + issue.type + " con severidad " + issue.severity + 
+    " en el archivo: " + issue.component + " linea " + issue.line + ". Descripcion: " + issue.message;
+    this.modalHomeworks.accion = false;
     console.log(issue);
+  }
+
+  elementoGuardado(){ // redirigir a kanban
+    $.notify({
+      icon: "pe-7s-diskette",
+      message: "<b>INCIDENCIA ASIGNADA DE FORMA EXITOSA!!.</b>"
+    },{
+        type:'success',
+        timer: 1000,
+        placement: {
+            from: 'top',
+            align: 'right'
+        }
+    });
   }
 
   cargaTabla(){

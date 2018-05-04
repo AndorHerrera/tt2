@@ -48,6 +48,7 @@ export class InicioComponent implements OnInit {
       usuario.sub = Constants.profile.sub;
       usuario.picture = Constants.profile.picture;
       usuario.nickname = Constants.profile.nickname;
+      usuario.name = Constants.profile.name;
       this._inicioService.addUser(usuario).subscribe(response => {
         this._sessionService.setUser(response[0]);
         this.router.navigate(['/proyects']);      

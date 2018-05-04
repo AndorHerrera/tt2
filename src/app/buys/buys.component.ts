@@ -38,8 +38,11 @@ export class BuysComponent implements OnInit {
   }
 
   getBuys(){
+    console.log("Entrea a getBuys:"+this.idUsuario);
     if(this.idUsuario!=undefined){
+      console.log("Entrea al if");
       this._buysService.getBuysBySub(this.idUsuario).subscribe(response => {
+        console.log("entra al buyService ");
         this.buys = response;
         $('#myTable').DataTable().destroy();
         this.cargaTabla();
@@ -80,7 +83,7 @@ export class BuysComponent implements OnInit {
       $('#myTable').DataTable({
         "aLengthMenu": [[10, 25, 100, -1], [10, 25, 100, "Todos"]],
         "iDisplayLength": 5,
-        "aoColumns": [{ "bSortable": false },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }],
+        "aoColumns": [{ "bSortable": false },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }],
           "oLanguage": {
             "sProcessing":     "Procesando...",
             "sLengthMenu":     "Mostrar _MENU_ ",

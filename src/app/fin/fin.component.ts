@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { SessionService } from '../services/sessionService.service';
 
 @Component({
   selector: 'app-fin',
@@ -7,12 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth:AuthService,private _sessionService: SessionService) { }
 
   ngOnInit() {
-    setTimeout(function () {
-      location.href ="https://tt2escom.auth0.com/login?state=KxLAtJKBGcDdlYZTHEvlPZugd4l38gs1&client=pbcTS24xlle40k6nmz48FBreN8nsZ46v&protocol=oauth2&response_type=token%20id_token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fproyects&scope=openid%20profile&audience=https%3A%2F%2Ftt2escom.auth0.com%2Fuserinfo&nonce=zDfMtAiHU~y6IhXfxwbUw~VYnmtuvjM0&auth0Client=eyJuYW1lIjoiYXV0aDAuanMiLCJ2ZXJzaW9uIjoiOS40LjEifQ%3D%3D";     
-    }, 1200);
+    this._sessionService.clearUser();
+    this.auth.logout();
+    this.auth.login();
   }
-
 }

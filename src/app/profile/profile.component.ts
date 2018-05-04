@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ProfileService } from './profile.service';
+import { SessionService } from '../services/sessionService.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,25 +14,10 @@ export class ProfileComponent implements OnInit {
   ndownloads:number=0;
   nuploads:number=0;
 
-  constructor(public auth:AuthService, public _userService:ProfileService) { }
+  constructor(public auth:AuthService, public _userService:ProfileService, private _sessionService: SessionService) { }
 
   ngOnInit() {
-    console.log("profile"+this.auth.getProfile);
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-      console.log(this.profile);
-
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-        console.log(this.profile);
-
-      });
-    }
-
-    this._userService.getUser().subscribe(response => {
-      console.log(response);
-    });
+    this.profile = this._sessionService.getUser();
   }
 
 }
