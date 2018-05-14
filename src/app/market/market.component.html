@@ -8,18 +8,18 @@
                 </span>
             </div>
         </div>
-        <div class="row">
+        <div class="col-md-12 row">
             <div class="col-md-4" *ngFor="let proy of proys">
-                <div class="card">
+                <div class="card market-card">
                     <img class="card-img-top" src="assets/img/{{proy.img}}" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-title">{{proy.title}}</p>
+                        <p class="card-title item_mark_title">{{proy.title}}</p>
                         <p class="card-text">{{proy.desc}}</p>
                         <p class="card-text" id="price">{{proy.points}} <img id="sp" src="assets/img/sp.png"></p>
                         <a routerLink="/marketdetail/{{proy.id}}" class="btn btn-primary" id="bot">Ver más</a>
                     </div>
                     <div class="card-body">
-                        <a href="#" class="card-link" *ngFor="let tag of proy.tags">#{{tag}} </a>
+                        <a href="#" class="card-link tag-market" *ngFor="let tag of proy.tags">#{{tag}} </a>
                     </div>
                 </div>
             </div>

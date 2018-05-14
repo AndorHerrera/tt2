@@ -3310,3 +3310,19 @@ table.table.table-hover.table-striped.tabla_valorizacion {
 button.boton_cangeo:focus {
   outline: 0;
 }
+
+.card.market-card {
+  width: 100% !important;
+  height: 450px;
+}
+
+p.card-text {
+  height: 50px;
+  word-break: break-all;
+}
+
+.item_mark_title {
+  font-weight: bold;
+  text-transform: uppercase;
+  word-break: break-all;
+}
