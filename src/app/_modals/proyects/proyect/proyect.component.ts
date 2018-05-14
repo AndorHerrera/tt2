@@ -13,6 +13,8 @@ import { Folder } from '../../../_models/folder.model';
 import { Url } from '../../../_models/url.model';
 import { InicioService } from '../../../inicio/inicio.service';
 import { SessionService } from '../../../services/sessionService.service';
+import { Movement } from '../../../_models/movements.model';
+import { MovementsService } from '../../../movements/movements.service';
 
 @Component({
   selector: 'app-proyect',
@@ -42,7 +44,7 @@ export class ProyectComponent implements OnInit {
 
   constructor(private _proyectsService: ProyectsService, private _kabanService: KanbanService,
               private _proyectDetailsService:ProyectDetailsService, private _userService:InicioService,
-              private _sessionService: SessionService) { }
+              private _sessionService: SessionService, private _movementesService:MovementsService) { }
 
   ngOnInit() {
     this.dropdownSettings = { 
@@ -150,10 +152,19 @@ export class ProyectComponent implements OnInit {
       let formData: FormData = new FormData();
       formData.append('url','');
       this._proyectDetailsService.addFisicFolder(formData,id).subscribe(response => {
-        console.log(response);
-        this.proyectEvent.emit();
+        this.pushNotification();
       });
     }
+  }
+
+  pushNotification(){
+    let movimiento: Movement = new Movement();
+    movimiento.sub = this._sessionService.getUser().sub;
+    movimiento.type = "Creación de Proyecto";
+    movimiento.description = "Creaste el proyecto "+ this.editableItem.title +" de forma exitosa!!!";
+    this._movementesService.addMovements(movimiento).subscribe(response => {
+      this.proyectEvent.emit();
+    });
   }
 
 }

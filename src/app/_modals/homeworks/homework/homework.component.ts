@@ -6,6 +6,8 @@ import { KanbanService } from '../../../canvas/canvas.service';
 import { UserService } from 'app/user/user.service';
 import { InicioService } from '../../../inicio/inicio.service';
 import { SessionService } from '../../../services/sessionService.service';
+import { MovementsService } from '../../../movements/movements.service';
+import { Movement } from '../../../_models/movements.model';
 
 @Component({
   selector: 'app-homework',
@@ -33,7 +35,7 @@ export class HomeworkComponent implements OnInit {
   homeworkEvent = new EventEmitter();
 
   constructor(private _kanbanService: KanbanService, private _userService: UserService,  
-              private _infoService:InicioService,  private _sessionService: SessionService) { }
+              private _infoService:InicioService,  private _sessionService: SessionService,private _movementesService:MovementsService) { }
 
   ngOnInit() {
     console.log("a"+this.asignados);
@@ -62,7 +64,7 @@ export class HomeworkComponent implements OnInit {
           this.editableItem.author = response[0];
           this.editableItem.status = "Por Hacer";
           this._kanbanService.addHomework(this.editableItem).subscribe(response => {
-            this.homeworkEvent.emit();
+            this.pushNotification();
           });
         });
     }
@@ -70,9 +72,17 @@ export class HomeworkComponent implements OnInit {
   }
 
   onChangeObj(newObj) {
-    console.log(newObj);
     this.editableItem.assigned = newObj;
-    console.log(this.editableItem.assigned);
+  }
+
+  pushNotification(){
+    let movimiento: Movement = new Movement();
+    movimiento.sub = this.editableItem.assigned.sub;
+    movimiento.type = "Tarea Asignada";
+    movimiento.description = this.editableItem.author.nickname + " te asigno la tarea "+ this.editableItem.title;
+    this._movementesService.addMovements(movimiento).subscribe(response => {
+      this.homeworkEvent.emit();
+    });
   }
 
   removeAll(){

@@ -3,6 +3,7 @@ import { MovementsService } from './movements.service';
 import { Profile } from '../_models/profile.model';
 import { Proyect } from '../_models/proyect.model';
 import { SessionService } from '../services/sessionService.service';
+import { Movement } from '../_models/movements.model';
 declare var $:any;
 
 @Component({
@@ -16,21 +17,21 @@ export class MovementsComponent implements OnInit {
 
   profile:Profile=new Profile;
   idUsuario:string;
-  public buys: Proyect[] = [];
+  public movimentes: Movement[] = [];
   blockLoader:boolean=true;
 
 
   ngOnInit() {
     if(this._sessionService.getUser()!=null){
       this.idUsuario = this._sessionService.getUser().sub;
-      this.getBuys();
+      this.getMovimientos();
     }
   }
 
-  getBuys(){
+  getMovimientos(){
     if(this.idUsuario!=undefined){
       this._movementsService.getMovementsByIdUser(this.idUsuario).subscribe(response => {
-        this.buys = response;
+        this.movimentes = response;
         $('#myTable').DataTable().destroy();
         this.cargaTabla();
         this.blockLoader =false;
@@ -43,7 +44,7 @@ export class MovementsComponent implements OnInit {
       $('#myTable').DataTable({
         "aLengthMenu": [[10, 25, 100, -1], [10, 25, 100, "Todos"]],
         "iDisplayLength": 5,
-        "aoColumns": [{ "bSortable": false },{ "bSortable": true },{ "bSortable": true },{ "bSortable": true },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": true }],
+        "aoColumns": [{ "bSortable": true },{ "bSortable": false },{ "bSortable": true }],
           "oLanguage": {
             "sProcessing":     "Procesando...",
             "sLengthMenu":     "Mostrar _MENU_ ",
@@ -61,7 +62,22 @@ export class MovementsComponent implements OnInit {
              "sPrevious": "Anterior",
              "sNext": "Siguiente"
             },
-         }
+         },initComplete: function() {
+          var api = this.api();
+          $('#myTable thead tr#forFilters th').each(function(i) {
+              if (i == 0) {
+                  var column = api.column(i);
+                  var select = $('<select><option value=""></option></select>').appendTo($(this)).on('change', function() {
+                      var val = $.fn.dataTable.util.escapeRegex(
+                      $(this).val());
+                      column.search(val ? '^' + val + '$' : '', true, false).draw();
+                  });
+                  column.data().unique().sort().each(function(d, j) {
+                      select.append('<option value="' + d + '">' + d + '</option>')
+                  });
+              }
+          });
+      }
       });
     }, 1);
   }
