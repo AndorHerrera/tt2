@@ -1,13 +1,15 @@
 <app-maincontainer>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4" *ngFor="let proy of proys">
-                <div class="card">
-                    <a href="{{proy.url}}" target="_blank">
-                        <img class="card-img-top" src="assets/img/{{proy.img}}" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        {{proy.title}}
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4" *ngFor="let proy of proys">
+                    <div class="card">
+                        <a href="{{proy.url}}" target="_blank">
+                            <img class="card-img-top" src="assets/img/{{proy.img}}" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            {{proy.title}}
+                        </div>
                     </div>
                 </div>
             </div>
