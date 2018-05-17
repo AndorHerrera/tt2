@@ -1,12 +1,13 @@
 <app-maincontainer>
     <div class="container">
         <div class="row">
+                <!--<button class="btn btn_large" data-toggle="modal" data-target="#newHelp"><i class="fa fa-plus"></i> Crear Nuevo Proyecto</button>-->
             <div class="col-md-4" *ngFor="let proy of proys">
                 <div class="card">
                     <a href="{{proy.url}}" target="_blank">
                         <img class="card-img-top" src="assets/img/{{proy.img}}" alt="Card image cap">
                     </a>
-                    <div class="card-body">
+                    <div class="card-body" >
                         {{proy.title}}
                     </div>
                 </div>
@@ -14,3 +15,13 @@
         </div>
     </div>
 </app-maincontainer>
+
+<div class="modal fade" id="newHelp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" aria-hidden="true" align="center">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header" align="center">
+              <p>HOLA</p>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -6,5 +6,5 @@ export class User {
     fatherLastName:string;
     motherLastName:string;
     picture:string;
-
+    sp:number;
 }

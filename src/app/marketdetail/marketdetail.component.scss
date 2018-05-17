@@ -17,7 +17,7 @@ img {
 }
   
 .card {
-  height: 350px;
+  height: 400px;
   margin-top: 45px;
   background: #FFFFFF;
   padding: 3em;
@@ -60,6 +60,12 @@ img {
   color: #fff;
   background-color: #428bca;
   border-color: #357ebd;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #da814e;
+  border-color: #c46027;
 }
 
 .btn-primary:hover,

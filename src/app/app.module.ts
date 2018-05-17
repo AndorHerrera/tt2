@@ -68,6 +68,7 @@ import { ProyectsharesService } from './proyectshares/proyectshares.service';
 import { SessionService } from './services/sessionService.service';
 import { CookieService } from 'angular2-cookie/services';
 import { MarketDetailComponent } from 'app/marketdetail/marketdetail.component';
+import { MarketService } from './market/market.service';
 
 @NgModule({
   declarations: [
@@ -137,7 +138,8 @@ import { MarketDetailComponent } from 'app/marketdetail/marketdetail.component';
     MovementsService,
     ProyectsharesService,
     SessionService,
-    CookieService
+    CookieService,
+    MarketService
   ],
   bootstrap: [AppComponent]
 })

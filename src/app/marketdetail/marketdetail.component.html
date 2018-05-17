@@ -6,11 +6,16 @@
 					<!--<div class="preview-pic tab-content">
 						<div class="tab-pane active" id="pic-1"></div>
 					</div>	-->
-					<img src="assets/img/{{mProy.img}}" />
+					<img src="assets/img/c1.jpg" />
+					
+					<hr>
+					<div class="details" *ngFor="let m of mMeasure">
+						<p>{{m.metric}}: {{m.value | uppercase}}</p>
+					</div>
 				</div>
 				<div class="details col-md-6">
-					<h3 class="product-title">{{mProy.title}}</h3>
-					<div class="rating">
+					<h3 class="product-title">{{proys.title}}</h3>
+					<!--<div class="rating">
 						<div class="stars">
 							<span class="fa fa-star checked"></span>
 							<span class="fa fa-star checked"></span>
@@ -19,9 +24,9 @@
 							<span class="fa fa-star"></span>
 						</div>
 						<span class="review-no">7 descargas</span>
-					</div>
-					<p class="product-description">{{mProy.desc}}</p>
-					<h4 class="price">Obtener: <span>{{mProy.points}} </span><img id="sp" src="assets/img/sp.png"></h4>
+					</div>-->
+					<p class="product-description">{{proys.description}}</p>
+					<h4 class="price">Obtener: <span>{{proys.price}} </span><img id="sp" src="assets/img/sp.png"></h4>
 						<!--<h5 class="sizes">sizes:
 							<span class="size" data-toggle="tooltip" title="small">s</span>
 							<span class="size" data-toggle="tooltip" title="medium">m</span>
@@ -30,8 +35,11 @@
 			</h5>-->
 					<h5 class="sizes"></h5>
 					<div class="action">
-						<button class="btn btn-primary" type="button">Obtener</button>
+						<button class="btn btn-primary" type="button" (click)="obtener()">Obtener</button>
+						<!--<button class="btn btn-simple btn-icon" (click)="verGraficas(this.sID)" title="Más información"><i class="fa fa-line-chart"></i></button>-->
 					</div>
+					<br>
+					<button class="btn btn-secondary" type="button" (click)="verGraficas(this.sID)">Ver más información</button>
 				</div>
 			</div>
 		</div>
