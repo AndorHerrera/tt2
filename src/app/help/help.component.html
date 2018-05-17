@@ -1,5 +1,6 @@
 <app-maincontainer>
     <div class="container">
+<<<<<<< HEAD
         <div class="row">
                 <!--<button class="btn btn_large" data-toggle="modal" data-target="#newHelp"><i class="fa fa-plus"></i> Crear Nuevo Proyecto</button>-->
             <div class="col-md-4" *ngFor="let proy of proys">
@@ -9,6 +10,18 @@
                     </a>
                     <div class="card-body" >
                         {{proy.title}}
+=======
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4" *ngFor="let proy of proys">
+                    <div class="card">
+                        <a href="{{proy.url}}" target="_blank">
+                            <img class="card-img-top" src="assets/img/{{proy.img}}" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            {{proy.title}}
+                        </div>
+>>>>>>> 072a3ebb948e8aa41eac68a909090d45b8fccf77
                     </div>
                 </div>
             </div>
