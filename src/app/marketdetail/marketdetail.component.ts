@@ -13,7 +13,8 @@ import { UserService } from '../user/user.service';
 import { SessionService } from '../services/sessionService.service';
 import { User } from '../_models/user.model';
 import { BuyproyectComponent } from '../_modals/buyproyect/buyproyect.component';
-
+import { BuysService } from '../buys/buys.service';
+import { Buy } from '../_models/buy.model';
 
 @Component({
   selector: 'app-marketdetail',
@@ -33,7 +34,8 @@ export class MarketDetailComponent implements OnInit {
     private proyDetails: ProyectDetailsService,
     private router: Router,
     private userService: UserService,
-    private _sessionService: SessionService) { }
+    private _sessionService: SessionService,
+    private buyService: BuysService) { }
 
   mID = 0;
   mProy = null;
@@ -42,7 +44,8 @@ export class MarketDetailComponent implements OnInit {
   dist;
   userID = "";
   proyEnabled = false;
-
+  isBought = false;
+  blockLoader:boolean=true;
 
   /*proys = [{id: '123', title: 'Proyecto web', desc: 'Un proyecto donde se desarrolla un sistema web en el los usuarios se pueden registrar en una red social', points: 300, img: 'c2.jpg', tags: ['Web', 'Red social'] },
     {id: '243', title: 'Proyecto mobil', desc: 'Un proyecto donde el usuario prodrá ver en un mapa su posición actual y en movimiento', points: 200, img: 'c3.jpeg', tags: ['Android', 'GPS', 'Google Maps']},
@@ -53,6 +56,7 @@ export class MarketDetailComponent implements OnInit {
   proys: Proyect;
   component: SonarComponent;
   folder: Folder[]=[];
+  pBuys: Buy[] = [];
   measure: Mesuare[]=[];
   mMeasure: Mesuare[]=[];
   nMeasure: Mesuare;  
@@ -147,6 +151,7 @@ export class MarketDetailComponent implements OnInit {
         this.mUser=response;
         console.log(response.sp);
         console.log(this.mUser.sp);
+        this.isProyectBought();
       });
     }
   }
@@ -164,6 +169,30 @@ export class MarketDetailComponent implements OnInit {
   obtener() {
     this.modalBuys.proy = this.proys;
     this.modalBuys.user = this.mUser;
+  }
+
+  isProyectBought() {
+    //console.log(this.u);
+    this.proys.users.forEach(user => {
+      if(user.sub==this.mUser.sub) {
+        this.isBought = true;
+      }
+    });
+
+    if(!this.isBought) {
+      
+      this.buyService.getBuysBySub(this.mUser.sub).subscribe(response => {
+        this.pBuys = response;
+        this.pBuys.forEach(buy => {
+          if(buy.user.sub==this.mUser.sub) {
+            this.isBought=true;
+          }
+        });
+      });
+    }
+    this.modalBuys.isBought = this.isBought;
+    console.log("is bought ->"+this.isBought);
+    this.blockLoader = false;
   }
 
   transaccionExitosa() {

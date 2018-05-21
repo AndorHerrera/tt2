@@ -7,11 +7,19 @@
 						<div class="tab-pane active" id="pic-1"></div>
 					</div>	-->
 					<img src="assets/img/c1.jpg" />
-					
 					<hr>
-					<div class="details" *ngFor="let m of mMeasure">
-						<p>{{m.metric}}: {{m.value | uppercase}}</p>
-					</div>
+					<table class="blueTable">
+						<thead>
+							<tr>
+								<th>Métrica</th>
+								<th>Valor</th>
+							</tr>
+						</thead>
+						<tr *ngFor="let m of mMeasure">
+							<td>{{m.metric}}</td>
+							<td>{{m.value | uppercase }}</td>
+						</tr>
+					</table>
 				</div>
 				<div class="details col-md-6">
 					<h3 class="product-title">{{proys.title}}</h3>
@@ -26,7 +34,7 @@
 						<span class="review-no">7 descargas</span>
 					</div>-->
 					<p class="product-description">{{proys.description}}</p>
-					<h4 class="price">Obtener: <span>{{proys.price}} </span><img id="sp" src="assets/img/sp.png"></h4>
+					<h4 *ngIf="!isBought" class="price">Obtener: <span>{{proys.price}} </span><img id="sp" src="assets/img/sp.png"></h4>
 						<!--<h5 class="sizes">sizes:
 							<span class="size" data-toggle="tooltip" title="small">s</span>
 							<span class="size" data-toggle="tooltip" title="medium">m</span>
@@ -35,7 +43,8 @@
 			</h5>-->
 					<h5 class="sizes"></h5>
 					<div class="action">
-						<button class="btn btn-primary" type="button" data-toggle="modal" data-dismiss="modal" data-target="#newBuy" (click)="obtener()" >Obtener</button>
+						<button *ngIf="!isBought" class="btn btn-primary" type="button" data-toggle="modal" data-dismiss="modal" data-target="#newBuy" (click)="obtener()" >Obtener</button>
+						<button *ngIf="isBought" routerLink="/proyectDetails/{{proyId}}" class="btn btn-primary" type="button">Ver</button>
 						<!--<button class="btn btn-simple btn-icon" (click)="verGraficas(this.sID)" title="Más información"><i class="fa fa-line-chart"></i></button>-->
 					</div>
 					<br>
@@ -45,4 +54,5 @@
 		</div>
 	</div>
 <app-buyproyect (buyproyectEvent)="transaccionExitosa()"></app-buyproyect>
+<div class="loader" *ngIf="blockLoader"></div>
 </app-maincontainer>

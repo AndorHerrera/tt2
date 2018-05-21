@@ -16,12 +16,19 @@ export class BuyproyectComponent implements OnInit {
   proy: Proyect;
   user: User;
   mBuy: Buy = new Buy;
+  isBought;
 
   constructor(private router: Router,
     private buysService: BuysService,
     private userService: UserService) { }
 
   ngOnInit() {
+    this.checkIfBought();
+  }
+
+  checkIfBought() {
+    //this.buysService.getBuysBySub()
+    //console.log(this.proy.idUser);
   }
 
   buy() {
@@ -49,6 +56,10 @@ export class BuyproyectComponent implements OnInit {
 
   enough() {
     return this.proy.price < this.user.sp;
+  }
+
+  verProyecto() {
+    this.router.navigate(['/marketdetail',this.proy.id]);
   }
 
 }

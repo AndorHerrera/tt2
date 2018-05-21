@@ -26,5 +26,4 @@ export class BuysService {
             return <Buy><any>response.json();
         });
     }
-
 }
