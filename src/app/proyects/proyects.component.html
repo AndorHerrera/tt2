@@ -48,8 +48,8 @@
                                         <td style="text-align:center"><button class="btn btn-simple btn-icon" (click)="newPerson(row.users,row.id)" data-toggle="modal" data-target="#newPerson"><i class="fa fa-share"></i></button></td>
                                         <td style="text-align:center">
                                             <button *ngIf="!row.sonar && row.price==undefined" class="btn btn-simple btn-icon" (click)="assessment(row.id)" disabled><i class="fa fa-usd"></i> Valorar</button>
-                                            <button *ngIf="row.price==undefined && row.sonar" class="btn btn-simple btn-icon" (click)="assessment(row.id)"><i class="fa fa-usd"></i> Valorar</button>
-                                            <span *ngIf="row.price!=undefined">${{row.price}} SP</span>
+                                            <button *ngIf="row.status=='Aprobado' && row.sonar" class="btn btn-simple btn-icon" (click)="assessment(row.id)"><i class="fa fa-usd"></i> Valorar</button>
+                                            <span *ngIf="row.price!=undefined && row.status!='Aprobado'">${{row.price}} SP</span>
                                         </td>
                                     </tr>
                                 </tbody>

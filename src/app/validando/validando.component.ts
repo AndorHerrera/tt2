@@ -58,7 +58,7 @@ export class ValidandoComponent implements OnInit {
   escanea(){
     this._validandoService.escaneaProyecto(this.idFolderMaster).subscribe(response => {
       this.responseScaneo = response;
-      this.getMesuares();
+        this.getMesuares();
     });
   }
 

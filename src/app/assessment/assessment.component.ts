@@ -35,7 +35,7 @@ export class AssessmentComponent implements OnInit {
   a:number=2.40;
   b:number=2.05;
   c:number=2.5;
-  d:number=0.38;
+  d:number=2.38;
   // Metricas Sonar
   promedioMetricas:number=0; // Total de promedio
   mantenibilidad:number=0;   // Promedio mantenibilidad
@@ -54,6 +54,7 @@ export class AssessmentComponent implements OnInit {
   ngOnInit() {
     this._activaRoute.params.subscribe( params => {
       this.idProyect = params['id'];
+
       this.getProyect();
     });
   }
@@ -135,21 +136,23 @@ export class AssessmentComponent implements OnInit {
       this.promedioMetricas = Math.round((this.mantenibilidad+this.seguridad+this.confiabilidad+this.noDuplicados)/4)*0.01;
       console.log("Prom"+this.promedioMetricas);
     }
+    
   }
 
   getEsfuerzo(){
-    let kncloc = this.ncloc*0.0001
-    this.esfuerzo = Math.round(this.a * (kncloc^this.b) * this.promedioMetricas);
+    let kncloc = (this.ncloc +1)/10000;
+    console.log("kncloc:"+this.ncloc);
+    this.esfuerzo = kncloc * this.promedioMetricas;
     console.log("Esfuerzo:"+this.esfuerzo);
   }
 
   getTiempo(){
-    this.tdev = Math.round(this.c * (this.esfuerzo^this.d));
+    this.tdev = this.c * (this.esfuerzo*this.d)*1000;
     console.log("TDEV:"+this.tdev);
   }
 
   getPersonas(){
-    this.costoH = this.round(this.esfuerzo/this.tdev, 1);
+    this.costoH = this.esfuerzo * 1.3;
     console.log("costoh:"+this.costoH);    
   }
 
@@ -159,8 +162,11 @@ export class AssessmentComponent implements OnInit {
     this.getTiempo();
     this.getPersonas();
     this.precioSP = Math.round(this.costoH * this.salarioTotal);
-    this.precioMarket = this.precioSP;
+    console.log("precioSP:"+this.precioSP);    
+    this.precioMarket = Math.round(this.precioSP + (this.precioSP*0.25));
+    console.log("precioMarket:"+this.precioMarket);    
     this.commission = Math.round(this.precioSP*0.15);
+    console.log("commission:"+this.commission);    
     this.blockLoader=false;
   }
 
