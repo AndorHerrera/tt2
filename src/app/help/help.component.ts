@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-help',
@@ -13,15 +14,16 @@ export class HelpComponent implements OnInit {
   {title: 'Trabajo colaborativo', url: 'EgFFAeG5BBQ', img:'cg.jpg'},
   {title: '¿Cómo calificamos los proyectos?', url: 'O-8IYWMltIg', img:'sq.png'}];
 
-  vUrl = "EgFFAeG5BBQ";
+  vUrl = "https://www.youtube.com/embed/EgFFAeG5BBQ";
 
-  constructor() { }
+
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
 
   openModal(url: string){
-    this.vUrl=url;
+    this.vUrl="https://www.youtube.com/embed/"+url;
     console.log(this.vUrl);
   }
 }
