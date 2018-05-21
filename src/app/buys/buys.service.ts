@@ -20,4 +20,11 @@ export class BuysService {
         });
     }
 
+    addBuys(mBuy:Buy): Observable<Buy> {
+        const url = Constants.endpoint + "/api/buys/";
+        return this._http.post(url,mBuy).map((response: Response)=>{
+            return <Buy><any>response.json();
+        });
+    }
+
 }

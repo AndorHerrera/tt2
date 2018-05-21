@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { MarketService } from '../market/market.service';
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
 import { SessionService } from '../services/sessionService.service';
 import { User } from '../_models/user.model';
+import { BuyproyectComponent } from '../_modals/buyproyect/buyproyect.component';
 
 
 @Component({
@@ -21,6 +22,9 @@ import { User } from '../_models/user.model';
 })
 
 export class MarketDetailComponent implements OnInit {
+
+  @ViewChild(BuyproyectComponent)
+  modalBuys: BuyproyectComponent;
 
   constructor(private route: ActivatedRoute,
     private location: Location,
@@ -158,6 +162,11 @@ export class MarketDetailComponent implements OnInit {
   }
 
   obtener() {
+    this.modalBuys.proy = this.proys;
+    this.modalBuys.user = this.mUser;
+  }
+
+  transaccionExitosa() {
 
   }
 
