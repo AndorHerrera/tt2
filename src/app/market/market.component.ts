@@ -36,10 +36,17 @@ export class MarketComponent implements OnInit {
   }
 
   find(term: string): void {
-    this.marketService.getProyectByName(term).subscribe(response => {
-      this.proys = response;
-      console.log(this.proys);
-    });
+    if(term.length > 0) {
+      this.marketService.getProyectByName(term).subscribe(response => {
+        this.proys = response;
+        console.log(this.proys);
+      });
+    } else {
+      this.marketService.getProyects().subscribe(response => {
+        this.proys = response;
+        console.log(this.proys);
+      });
+    }
   }
 
   tagOpen(tag:Tag){
