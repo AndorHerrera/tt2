@@ -26,4 +26,12 @@ export class UserService {
         });
     }
 
+    payProyect(user:User,sp:number): Observable<User> {
+        user.sp -= sp;
+        const url = Constants.endpoint + "/api/users/"+user.id;
+        return this._http.put(url,user).map((response: Response) => {
+            return <User><any>response.json();
+        });
+    }
+
 }

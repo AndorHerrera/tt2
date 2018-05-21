@@ -4,7 +4,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" #titleInput>
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button" (click) = 'addTodo(titleInput.value)'>BUSCAR</button>
+                    <button class="btn btn-primary" type="button" (click) = 'find(titleInput.value)'>BUSCAR</button>
                 </span>
             </div>
         </div>
@@ -19,7 +19,7 @@
                         <a routerLink="/marketdetail/{{proy.id}}" class="btn btn-primary" id="bot">Ver más</a>
                     </div>
                     <div class="card-body">
-                        <a href="#" class="card-link tag-market" *ngFor="let tag of proy.tags">#{{tag.descripcion}} </a>
+                        <a href="javascript:" (click)= 'tagOpen(tag)' class="card-link tag-market" *ngFor="let tag of proy.tags">#{{tag.descripcion}} </a>
                     </div>
                 </div>
             </div>

@@ -36,6 +36,7 @@ import { UpFileComponent } from './_modals/files/up-file/up-file.component';
 import { ProyectComponent } from './_modals/proyects/proyect/proyect.component';
 import { DeleteProyectComponent } from './_modals/proyects/delete-proyect/delete-proyect.component';
 import { DownloadFilesComponent } from './_modals/files/download-files/download-files.component';
+import { BuyproyectComponent } from './_modals/buyproyect/buyproyect.component';
 import { ProyectsService } from './proyects/proyects.service';
 import { KanbanService } from './canvas/canvas.service';
 import { HomeworkComponent } from './_modals/homeworks/homework/homework.component';
@@ -107,7 +108,8 @@ import { MarketService } from './market/market.service';
     AssessmentComponent,
     MovementsComponent,
     ProyectsharesComponent,
-    MarketDetailComponent
+    MarketDetailComponent,
+    BuyproyectComponent
   ],
   imports: [
     BrowserModule,

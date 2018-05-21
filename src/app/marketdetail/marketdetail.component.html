@@ -35,7 +35,7 @@
 			</h5>-->
 					<h5 class="sizes"></h5>
 					<div class="action">
-						<button class="btn btn-primary" type="button" (click)="obtener()">Obtener</button>
+						<button class="btn btn-primary" type="button" data-toggle="modal" data-dismiss="modal" data-target="#newBuy" (click)="obtener()" >Obtener</button>
 						<!--<button class="btn btn-simple btn-icon" (click)="verGraficas(this.sID)" title="Más información"><i class="fa fa-line-chart"></i></button>-->
 					</div>
 					<br>
@@ -44,4 +44,5 @@
 			</div>
 		</div>
 	</div>
+<app-buyproyect (buyproyectEvent)="transaccionExitosa()"></app-buyproyect>
 </app-maincontainer>

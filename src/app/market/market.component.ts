@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MarketService } from './market.service';
 import { Proyect } from '../_models/proyect.model';
+import { Tag } from '../_models/tag.model';
 
 @Component({
   selector: 'app-market',
@@ -34,16 +35,18 @@ export class MarketComponent implements OnInit {
     });
   }
 
-  addTodo(term: string): void {
-    console.log(term);
-    this.res = [];
-    for(var i=0; i < this.proys.length; i++) {
-      if(this.proys[i].title.indexOf(term) >= 0){
-        console.log(this.proys[i]);
-        this.res.push(this.proys[i]);
-      }
-    }
-    this.proys = this.res;
+  find(term: string): void {
+    this.marketService.getProyectByName(term).subscribe(response => {
+      this.proys = response;
+      console.log(this.proys);
+    });
+  }
+
+  tagOpen(tag:Tag){
+    console.log(tag.id);
+    this.marketService.getProyectByTag(tag.id).subscribe(response => {
+      this.proys = response;
+    });
   }
 
 }
